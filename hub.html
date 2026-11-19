@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazard Hub | Open data for hydroclimatic extremes and multi-hazard risk</title>
+<meta name="description" content="A curated, searchable catalogue of open datasets for floods, landslides, glacial lake outburst floods, drought and multi-hazard risk, with Earth Engine snippets and a live Himalaya rainfall and river-flow watch.">
+<meta property="og:title" content="Hazard Hub: open data for multi-hazard risk">
+<meta property="og:description" content="Find, cite and start using the open datasets behind hazard and risk research, in one place.">
+<meta name="theme-color" content="#F2F5F4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230F6F6B'/%3E%3Cpath d='M5 20c5-6 9 2 13-4s6-3 9-2' stroke='%23F2F5F4' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.hub-hero{padding:clamp(24px,5vw,64px) 0 clamp(36px,5vw,56px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,64px);align-items:end}
+.hub-hero h1{font-weight:740;font-stretch:120%;font-size:clamp(2.8rem,6.4vw,5.4rem);line-height:.95;letter-spacing:-.03em;margin:0 0 .35em}
+.hub-hero .lede{font-size:clamp(1.15rem,1.6vw,1.35rem);line-height:1.5;margin:0;max-width:44ch}
+.hub-hero .by{font-family:var(--sans);font-size:.95rem;color:var(--scree);margin:16px 0 0}
+.counts{display:flex;gap:clamp(20px,3vw,40px);font-family:var(--sans);flex-wrap:wrap}
+.counts b{display:block;font-size:2.4rem;font-weight:720;font-stretch:112%;line-height:1}
+.counts span{font-size:.9rem;color:var(--scree)}
+
+.search{display:flex;align-items:center;gap:12px;border:1.5px solid var(--ink);border-radius:6px;background:var(--paper);padding:4px 6px 4px 16px;margin:0 0 18px}
+.search svg{flex:none;color:var(--scree)}
+.search input{flex:1;font:inherit;font-family:var(--sans);font-size:1.1rem;border:0;background:none;color:var(--ink);padding:12px 0;min-width:0}
+.search input:focus{outline:none}
+.search:focus-within{box-shadow:0 0 0 3px color-mix(in srgb,var(--lake) 30%,transparent)}
+.filters{display:grid;gap:12px;margin-bottom:26px}
+.filters .row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.filters .lab{font-family:var(--sans);font-size:.875rem;color:var(--scree);min-width:84px}
+.resultline{font-family:var(--sans);font-size:.95rem;color:var(--scree);margin:0 0 6px}
+
+.group{margin-top:34px}
+.group h3{font-size:1.05rem;color:var(--scree);font-weight:600;margin:0 0 4px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.ds{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,4fr) auto;gap:8px 28px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:start}
+.ds .nm{font-family:var(--sans);font-weight:620;font-size:1.06rem;margin:0}
+.ds .nm a{color:var(--ink);text-decoration:none}
+.ds .nm a:hover{color:var(--lake);text-decoration:underline}
+.ds .pv{font-family:var(--sans);font-size:.875rem;color:var(--scree);margin:2px 0 6px}
+.ds .de{margin:0;font-size:.98rem}
+.ds .meta{font-family:var(--sans);font-size:.875rem;display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:0}
+.ds .meta dt{color:var(--scree)}
+.ds .meta dd{margin:0}
+.ds .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.ds .acts{display:flex;flex-direction:column;align-items:flex-start;gap:6px;font-family:var(--sans);font-size:.9rem;white-space:nowrap}
+.ds .acts button{font:inherit;background:none;border:0;padding:0;color:var(--lake);cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+.empty{font-family:var(--sans);padding:28px 0;color:var(--scree)}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:var(--snow);font-family:var(--sans);font-size:.95rem;padding:10px 16px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.on{opacity:1}
+
+/* Live watch */
+.watch{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(24px,4vw,56px)}
+.wcard h3{margin-bottom:4px}
+.wcard .sub{font-family:var(--sans);font-size:.9rem;color:var(--scree);margin:0 0 16px}
+.sites{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:.9rem}
+.sites th{text-align:left;font-weight:500;color:var(--scree);padding:6px 8px 8px 0;border-bottom:1px solid var(--rule);font-size:.82rem}
+.sites td{padding:10px 8px 10px 0;border-bottom:1px solid var(--rule);vertical-align:middle}
+.sites td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.sites .place b{display:block;font-weight:600}
+.sites .place i{font-family:var(--serif);color:var(--lake);font-size:.95rem}
+.spark{display:block}
+.state-msg{font-family:var(--sans);font-size:.92rem;color:var(--scree);background:var(--paper);border:1px dashed var(--contour-major);border-radius:6px;padding:14px 16px;margin:0 0 14px}
+#pulse{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--rule);border-radius:6px}
+#pulse .land{fill:var(--contour);stroke:none}
+.pulse-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-family:var(--sans);font-size:.85rem;color:var(--scree);margin:10px 0}
+.pulse-legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:0}
+.evlist{list-style:none;margin:6px 0 0;padding:0;font-family:var(--sans);font-size:.9rem}
+.evlist li{display:flex;justify-content:space-between;gap:16px;padding:7px 0;border-bottom:1px solid var(--rule)}
+.evlist span:last-child{color:var(--scree);white-space:nowrap}
+
+/* Roadmap */
+.road{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;counter-reset:r}
+.road li{padding:16px 18px 0 0;border-top:3px solid var(--contour)}
+.road li.done{border-top-color:var(--lake)}
+.road li::before{counter-increment:r;content:"Stage " counter(r);display:block;font-family:var(--sans);font-size:.8rem;color:var(--scree);margin-bottom:6px}
+.road h3{font-size:1.02rem}
+.road p{margin:0;font-size:.95rem;color:var(--scree)}
+.road .st{font-family:var(--sans);font-size:.8rem;font-weight:600;color:var(--lake);display:block;margin-top:8px}
+.road li:not(.done) .st{color:var(--silt)}
+.contrib{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
+
+@media (max-width:960px){
+  .hub-hero,.watch{grid-template-columns:1fr}
+  .road{grid-template-columns:1fr 1fr;row-gap:24px}
+  .ds{grid-template-columns:1fr;gap:10px}
+  .ds .acts{flex-direction:row;flex-wrap:wrap;gap:8px 18px}
+}
+@media (max-width:560px){
+  .road{grid-template-columns:1fr}
+  .sites .hide-s{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Satyender Yadav</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="hub.html" aria-current="page">Hazard Hub</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hub-hero">
+      <div>
+        <h1>Hazard Hub</h1>
+        <p class="lede">Open data for hydroclimatic extremes and multi-hazard risk, in one place: what exists, where to get it, how to cite it, and a live view of what is happening now.</p>
+        <p class="by">Curated by Satyender Yadav. Free to use, and open to contributions.</p>
+      </div>
+      <div class="counts" aria-label="Hub at a glance">
+        <div><b id="c-all">44</b><span>datasets</span></div>
+        <div><b id="c-gee">15</b><span>in Earth Engine</span></div>
+        <div><b id="c-api">7</b><span>with an API</span></div>
+      </div>
+    </div>
+
+    <!-- LIVE WATCH -->
+    <section id="live" aria-labelledby="live-h" style="border-top:0;padding-top:clamp(8px,2vw,24px)">
+      <div class="sec-head">
+        <h2 id="live-h">Live watch</h2>
+        <p>Two views that update every time the page opens: the rainfall and river outlook for my study region in the Uttarakhand Himalaya, and open flood, landslide, storm and earthquake events worldwide.</p>
+      </div>
+      <div class="watch">
+        <div class="wcard">
+          <h3>Uttarakhand rainfall and river outlook</h3>
+          <p class="sub">Next 7 days of rainfall, and river discharge forecast from GloFAS at the nearest grid cell. Indicative only, not a warning.</p>
+          <div id="hw"></div>
+        </div>
+        <div class="wcard">
+          <h3>Global hazard pulse</h3>
+          <p class="sub">Open events from NASA EONET (last 30 days) and earthquakes of magnitude 4.5 and above from USGS (last 7 days).</p>
+          <div id="pulse-msg"></div>
+          <svg id="pulse" viewBox="0 0 1000 500" role="img" aria-label="World map of current hazard events"><path class="land" id="landpath" d=""/><g id="pulse-pts"></g></svg>
+          <div class="pulse-legend" aria-hidden="true">
+            <span><i style="background:var(--lake)"></i>Floods</span>
+            <span><i style="background:var(--silt-fill)"></i>Landslides</span>
+            <span><i style="background:#6B7FA8"></i>Severe storms</span>
+            <span><i style="background:#C2463A"></i>Earthquakes</span>
+          </div>
+          <ul class="evlist" id="evlist"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="catalogue" aria-labelledby="cat-h">
+      <div class="sec-head"><h2 id="cat-h">Dataset catalogue</h2><p>Search or filter by hazard and by how you want to access the data. Earth Engine datasets come with code you can paste straight into the Code Editor.</p></div>
+      <label class="search" for="q">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <span class="vh">Search datasets</span>
+        <input id="q" type="search" placeholder="Search by name, variable or region, such as rainfall, glacial lake or India" autocomplete="off">
+      </label>
+      <div class="filters">
+        <div class="row"><span class="lab" id="lab-hz">Hazard</span>
+          <div class="chips" role="group" aria-labelledby="lab-hz" data-filter="hazard">
+            <button type="button" data-v="" aria-pressed="true">All</button>
+            <button type="button" data-v="flood" aria-pressed="false">Floods</button>
+            <button type="button" data-v="landslide" aria-pressed="false">Landslides</button>
+            <button type="button" data-v="glof" aria-pressed="false">Glacial lake outbursts</button>
+            <button type="button" data-v="drought" aria-pressed="false">Drought</button>
+            <button type="button" data-v="multi" aria-pressed="false">Multi-hazard and risk</button>
+          </div>
+        </div>
+        <div class="row"><span class="lab" id="lab-ac">Access</span>
+          <div class="chips" role="group" aria-labelledby="lab-ac" data-filter="access">
+            <button type="button" data-v="" aria-pressed="true">Any</button>
+            <button type="button" data-v="gee" aria-pressed="false">Google Earth Engine</button>
+            <button type="button" data-v="api" aria-pressed="false">API</button>
+            <button type="button" data-v="download" aria-pressed="false">Download</button>
+          </div>
+        </div>
+      </div>
+      <p class="resultline" id="resultline" aria-live="polite"></p>
+      <div id="results"></div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" aria-labelledby="road-h">
+      <div class="sec-head">
+        <h2 id="road-h">How the Hub grows</h2>
+        <p>The aim is one place where anyone working on hydroclimatic extremes and multi-hazard risk can find the data, the code and the evidence. It grows in stages, and you can help.</p>
+      </div>
+      <ol class="road">
+        <li class="done"><h3>Catalogue</h3><p>Curated open datasets with access routes and citations.</p><span class="st">Live</span></li>
+        <li class="done"><h3>Live watch</h3><p>Rainfall, river flow and global events from open APIs.</p><span class="st">Live</span></li>
+        <li><h3>Community submissions</h3><p>Anyone can suggest a dataset through GitHub, reviewed before it is listed.</p><span class="st">Next</span></li>
+        <li><h3>Region pages</h3><p>Himalaya, Andes and Alps pages with local inventories and agencies.</p><span class="st">Planned</span></li>
+        <li><h3>Ask the Hub</h3><p>AI search over datasets and literature with cited answers, built like the ICL assistant.</p><span class="st">Planned</span></li>
+      </ol>
+      <div class="contrib">
+        <a class="btn" href="https://github.com/yadavsatyender/yadavsatyender.github.io/issues/new?title=Dataset%20suggestion">Suggest a dataset</a>
+        <a class="btn ghost" href="assets/data/datasets.json">Get the catalogue as JSON</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <span>© 2026 Satyender Yadav. Catalogue CC BY 4.0. Dataset licences belong to their providers.</span>
+    <span>Live data: <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>, GloFAS (Copernicus EMS), NASA EONET, USGS</span>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+var toastEl=document.getElementById('toast'),tt;
+function toast(m){toastEl.textContent=m;toastEl.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){toastEl.classList.remove('on');},2600);}
+var HZ={flood:'Floods',landslide:'Landslides',glof:'Glacial lake outbursts',drought:'Drought',multi:'Multi-hazard'};
+var AC={gee:'Earth Engine',api:'API',download:'Download'};
+
+/* ---------- Catalogue ---------- */
+var DS=[], f={q:'',hazard:'',access:''};
+var order=['Events and impacts','Climate and rainfall','Hydrology and forecasts','Terrain and Earth observation','Exposure and vulnerability','Alerts and live feeds','Knowledge and policy'];
+function snippet(d){
+  var v='var data = ee.'+d.ee+'("'+d.gee+'");';
+  return '// '+d.name+' ('+d.provider+'), found on Hazard Hub\n'+v+'\nprint('+(d.ee==='Image'?'data':'data.limit(5)')+');';
+}
+function render(){
+  var toks=f.q.toLowerCase().split(/\s+/).filter(Boolean);
+  var list=DS.filter(function(d){
+    if(f.hazard&&d.hazards.indexOf(f.hazard)<0)return false;
+    if(f.access&&d.access.indexOf(f.access)<0)return false;
+    if(!toks.length)return true;
+    var hay=(d.name+' '+d.provider+' '+d.desc+' '+d.group+' '+d.coverage+' '+d.hazards.map(function(h){return HZ[h];}).join(' ')).toLowerCase();
+    return toks.every(function(t){return hay.indexOf(t)>=0;});
+  });
+  document.getElementById('resultline').textContent=list.length===DS.length?'Showing all '+DS.length+' datasets':'Showing '+list.length+' of '+DS.length+' datasets';
+  var out='';
+  order.forEach(function(g){
+    var items=list.filter(function(d){return d.group===g;}); if(!items.length)return;
+    out+='<div class="group"><h3>'+esc(g)+'</h3>';
+    items.forEach(function(d){
+      var i=DS.indexOf(d);
+      out+='<article class="ds"><div><p class="nm"><a href="'+esc(d.url)+'">'+esc(d.name)+'</a></p><p class="pv">'+esc(d.provider)+'</p><p class="de">'+esc(d.desc)+'</p>'
+        +'<div class="tags">'+d.hazards.map(function(h){return '<span class="tag '+h+'">'+HZ[h]+'</span>';}).join('')+d.access.map(function(a){return '<span class="tag">'+AC[a]+'</span>';}).join('')+'</div></div>'
+        +'<dl class="meta"><dt>Coverage</dt><dd>'+esc(d.coverage)+'</dd><dt>Resolution</dt><dd>'+esc(d.resolution)+'</dd><dt>Period</dt><dd>'+esc(d.period)+'</dd>'+(d.gee?'<dt>Earth Engine</dt><dd><code style="font-size:.82rem;word-break:break-all">'+esc(d.gee)+'</code></dd>':'')+'</dl>'
+        +'<div class="acts"><a href="'+esc(d.url)+'">Open dataset</a>'+(d.gee?'<button type="button" data-snip="'+i+'">Copy Earth Engine code</button>':'')+(d.paper&&d.paper!==d.url?'<a href="'+esc(d.paper)+'">Paper</a>':'')+'</div></article>';
+    });
+    out+='</div>';
+  });
+  document.getElementById('results').innerHTML=out||'<p class="empty">No datasets match. Try a broader word, or clear a filter.</p>';
+}
+document.getElementById('results').addEventListener('click',function(e){
+  var b=e.target.closest('[data-snip]'); if(!b)return;
+  var d=DS[+b.dataset.snip];
+  try{navigator.clipboard.writeText(snippet(d)).then(function(){toast('Earth Engine code for '+d.name+' copied.');},function(){toast('Copy was blocked. The collection ID is shown next to the dataset.');});}
+  catch(err){toast('Copy was blocked. The collection ID is shown next to the dataset.');}
+});
+document.getElementById('q').addEventListener('input',function(e){f.q=e.target.value;render();});
+document.querySelectorAll('[data-filter]').forEach(function(g){
+  var bs=[].slice.call(g.querySelectorAll('button'));
+  bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.setAttribute('aria-pressed',x===b);});f[g.dataset.filter]=b.dataset.v;render();});});
+});
+fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(function(d){
+  DS=d;
+  document.getElementById('c-all').textContent=d.length;
+  document.getElementById('c-gee').textContent=d.filter(function(x){return x.gee;}).length;
+  document.getElementById('c-api').textContent=d.filter(function(x){return x.access.indexOf('api')>=0;}).length;
+  render();
+}).catch(function(){document.getElementById('results').innerHTML='<p class="empty">The catalogue could not load. Refresh the page to try again.</p>';});
+
+/* ---------- Uttarakhand watch (Open-Meteo + GloFAS) ---------- */
+var SITES=[
+  {n:'Joshimath',r:'Alaknanda',lat:30.555,lng:79.565},
+  {n:'Rudraprayag',r:'Alaknanda and Mandakini',lat:30.284,lng:78.981},
+  {n:'Uttarkashi',r:'Bhagirathi',lat:30.729,lng:78.443},
+  {n:'Devprayag',r:'Ganga',lat:30.146,lng:78.598},
+  {n:'Bageshwar',r:'Saryu',lat:29.838,lng:79.771},
+  {n:'Dharchula',r:'Kali',lat:29.848,lng:80.54}
+];
+function bars(vals,max){
+  var w=112,h=30,bw=w/vals.length; var s='<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" aria-hidden="true">';
+  vals.forEach(function(v,i){var bh=max>0?Math.max(1,(v||0)/max*(h-2)):1;s+='<rect x="'+(i*bw+1).toFixed(1)+'" y="'+(h-bh).toFixed(1)+'" width="'+(bw-2).toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="1" fill="'+css('--lake-fill')+'"/>';});
+  return s+'</svg>';
+}
+function line(vals){
+  var w=112,h=30,mn=Math.min.apply(null,vals),mx=Math.max.apply(null,vals),rg=mx-mn||1;
+  var pts=vals.map(function(v,i){return (i/(vals.length-1)*w).toFixed(1)+','+(h-2-(v-mn)/rg*(h-6)).toFixed(1);}).join(' ');
+  return '<svg class="spark" width="'+w+'" height="'+h+'" viewBox="0 0 '+w+' '+h+'" aria-hidden="true"><polyline points="'+pts+'" fill="none" stroke="'+css('--silt')+'" stroke-width="1.8" stroke-linejoin="round"/></svg>';
+}
+(function(){
+  var el=document.getElementById('hw');
+  var lat=SITES.map(function(s){return s.lat;}).join(','), lng=SITES.map(function(s){return s.lng;}).join(',');
+  el.innerHTML='<p class="state-msg">Loading the latest forecasts</p>';
+  var A=fetch('https://api.open-meteo.com/v1/forecast?latitude='+lat+'&longitude='+lng+'&daily=precipitation_sum&forecast_days=7&timezone=Asia%2FKolkata').then(function(r){if(!r.ok)throw 0;return r.json();});
+  var B=fetch('https://flood-api.open-meteo.com/v1/flood?latitude='+lat+'&longitude='+lng+'&daily=river_discharge&forecast_days=10').then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;});
+  Promise.all([A,B]).then(function(res){
+    var rain=[].concat(res[0]), flow=res[1]?[].concat(res[1]):null;
+    var maxR=0; rain.forEach(function(x){x.daily.precipitation_sum.forEach(function(v){if(v>maxR)maxR=v;});});
+    var h='<table class="sites"><thead><tr><th>Place</th><th>Rain, 7 days</th><th class="num">Total</th><th class="hide-s">River, 10 days</th><th class="num hide-s">Now</th></tr></thead><tbody>';
+    SITES.forEach(function(s,i){
+      var r=rain[i].daily.precipitation_sum, tot=r.reduce(function(a,b){return a+(b||0);},0);
+      var q=flow&&flow[i]&&flow[i].daily?flow[i].daily.river_discharge.filter(function(v){return v!=null;}):[];
+      h+='<tr><td class="place"><b>'+esc(s.n)+'</b><i>'+esc(s.r)+'</i></td><td>'+bars(r,Math.max(maxR,10))+'</td><td class="num">'+tot.toFixed(0)+' mm</td>'
+        +'<td class="hide-s">'+(q.length>1?line(q):'<span class="muted">No data</span>')+'</td><td class="num hide-s">'+(q.length?Math.round(q[0])+' m³/s':'')+'</td></tr>';
+    });
+    el.innerHTML=h+'</tbody></table><p class="muted sans" style="font-size:.82rem;margin-top:10px">Bars share one scale across places. Updated '+new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+'.</p>';
+  }).catch(function(){
+    el.innerHTML='<p class="state-msg">Live forecasts appear when this page runs on the public website. This preview cannot reach outside data services.</p>';
+  });
+})();
+
+/* ---------- Global pulse ---------- */
+(function(){
+  var P=function(lat,lng){return [(lng+180)/360*1000,(90-lat)/180*500];};
+  var g=document.getElementById('pulse-pts'), list=document.getElementById('evlist'), msg=document.getElementById('pulse-msg');
+  var COL={floods:css('--lake'),landslides:css('--silt-fill'),severeStorms:'#6B7FA8',eq:'#C2463A'};
+  fetch('assets/data/land-path.txt').then(function(r){return r.text();}).then(function(d){document.getElementById('landpath').setAttribute('d',d);}).catch(function(){});
+  function dot(x,y,c,r,title){return '<circle cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="'+r+'" fill="'+c+'" fill-opacity=".85" stroke="'+css('--paper')+'" stroke-width="1"><title>'+esc(title)+'</title></circle>';}
+  var E=fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=30&category=floods,landslides,severeStorms&limit=120').then(function(r){if(!r.ok)throw 0;return r.json();});
+  var Q=fetch('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson').then(function(r){if(!r.ok)throw 0;return r.json();}).catch(function(){return null;});
+  Promise.all([E,Q]).then(function(res){
+    var evs=[];
+    (res[0].events||[]).forEach(function(e){
+      var geo=e.geometry&&e.geometry[e.geometry.length-1]; if(!geo)return;
+      var c=geo.type==='Point'?geo.coordinates:(geo.coordinates&&geo.coordinates[0]&&geo.coordinates[0][0]); if(!c)return;
+      var cat=e.categories&&e.categories[0]&&e.categories[0].id;
+      evs.push({t:e.title,cat:cat,lat:c[1],lng:c[0],date:geo.date,label:e.categories[0].title});
+    });
+    var qs=res[1]&&res[1].features?res[1].features.map(function(q){return {t:q.properties.place||'Earthquake',cat:'eq',lat:q.geometry.coordinates[1],lng:q.geometry.coordinates[0],date:new Date(q.properties.time).toISOString(),label:'M'+q.properties.mag.toFixed(1)+' earthquake',mag:q.properties.mag};}):[];
+    var s='';
+    qs.forEach(function(q){var p=P(q.lat,q.lng);s+=dot(p[0],p[1],COL.eq,Math.max(2.5,(q.mag-4)*2.4),q.label+', '+q.t);});
+    evs.forEach(function(e){var p=P(e.lat,e.lng);s+=dot(p[0],p[1],COL[e.cat]||css('--scree'),5,e.label+': '+e.t);});
+    g.innerHTML=s;
+    var recent=evs.concat(qs.filter(function(q){return q.mag>=6;})).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}).slice(0,8);
+    list.innerHTML=recent.map(function(e){return '<li><span>'+esc(e.cat==='eq'?e.label+', '+e.t:e.t)+'</span><span>'+(e.date?new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):'')+'</span></li>';}).join('');
+  }).catch(function(){
+    msg.innerHTML='<p class="state-msg">Live events appear when this page runs on the public website. Below: selected past disasters from my research reading.</p>';
+    fetch('assets/data/events.json').then(function(r){return r.json();}).then(function(d){
+      g.innerHTML=d.events.map(function(e){var p=P(e.lat,e.lng);return dot(p[0],p[1],css('--silt-fill'),5,e.name+', '+e.year);}).join('');
+      list.innerHTML=d.events.slice().sort(function(a,b){return b.year-a.year;}).slice(0,8).map(function(e){return '<li><span>'+esc(e.name)+', '+esc(e.kind.toLowerCase())+'</span><span>'+e.year+'</span></li>';}).join('');
+    });
+  });
+})();
+})();
+</script>
+</body>
+</html>

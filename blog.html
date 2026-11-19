@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Field notes | Satyender Yadav</title>
+<meta name="description" content="Weekly stories from research and practice on landslides, floods, glacial lake hazards, disaster risk and AI, by Satyender Yadav.">
+<meta name="theme-color" content="#F2F5F4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230F6F6B'/%3E%3Cpath d='M5 20c5-6 9 2 13-4s6-3 9-2' stroke='%23F2F5F4' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.b-hero{padding:clamp(24px,5vw,64px) 0 clamp(28px,4vw,48px)}
+.b-hero h1{font-weight:740;font-stretch:120%;font-size:clamp(2.8rem,6.4vw,5.2rem);line-height:.95;letter-spacing:-.03em;margin:0 0 .35em}
+.b-hero p{font-size:clamp(1.12rem,1.5vw,1.3rem);max-width:46ch;margin:0}
+.tagbar{margin:28px 0 8px}
+.plist{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.plist li{display:grid;grid-template-columns:150px minmax(0,1fr);gap:24px;padding:26px 0;border-bottom:1px solid var(--rule)}
+.plist time{font-family:var(--sans);font-size:.9rem;color:var(--scree);padding-top:4px}
+.plist h2{font-size:clamp(1.3rem,2.2vw,1.65rem);font-stretch:105%;margin:0 0 8px}
+.plist h2 a{color:var(--ink);text-decoration:none}
+.plist h2 a:hover{color:var(--lake);text-decoration:underline}
+.plist p{margin:0 0 10px;max-width:var(--measure);color:var(--scree)}
+.plist .tags{display:flex;gap:6px;flex-wrap:wrap}
+.draft{font-family:var(--sans);font-size:.75rem;color:var(--silt);border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:10px;vertical-align:4px;font-weight:500}
+
+article.post{max-width:720px;margin:0 auto;padding:clamp(16px,4vw,48px) 0 clamp(56px,8vw,96px)}
+.back{font-family:var(--sans);font-size:.95rem}
+article.post h1{font-weight:720;font-stretch:112%;font-size:clamp(2rem,4.4vw,3.2rem);line-height:1.05;letter-spacing:-.02em;margin:.6em 0 .4em}
+.pmeta{font-family:var(--sans);font-size:.95rem;color:var(--scree);display:flex;flex-wrap:wrap;gap:6px 18px;margin-bottom:36px;padding-bottom:22px;border-bottom:1px solid var(--rule)}
+.prose{font-size:1.15rem;line-height:1.72}
+.prose p{margin:0 0 1.2em}
+.prose h2{font-size:1.45rem;margin:1.8em 0 .6em;font-stretch:106%}
+.prose h3{margin:1.5em 0 .5em}
+.prose ul,.prose ol{padding-left:1.3em;margin:0 0 1.2em}
+.prose li{margin-bottom:.45em}
+.prose blockquote{margin:1.4em 0;padding:4px 0 4px 20px;border-left:3px solid var(--lake);font-style:italic;color:var(--scree)}
+.prose img{border-radius:6px;display:block;margin:1.4em 0}
+.prose code{font-size:.9em;background:var(--paper);border:1px solid var(--rule);border-radius:3px;padding:1px 5px}
+.prose pre{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:14px 16px;overflow:auto;font-size:.9rem}
+.prose em:last-child{color:var(--scree)}
+.share{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:44px;padding-top:22px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.95rem}
+@media (max-width:720px){.plist li{grid-template-columns:1fr;gap:4px}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Satyender Yadav</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="hub.html">Hazard Hub</a></li>
+        <li><a href="blog.html" aria-current="page">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div id="list-view">
+      <div class="b-hero">
+        <h1>Field notes</h1>
+        <p>A story every week from research and practice on mountain hazards, disaster risk and AI: what worked, what failed, and what I learned.</p>
+      </div>
+      <div class="chips tagbar" id="tagbar" role="group" aria-label="Filter by topic"></div>
+      <ol class="plist" id="plist"><li><span></span><p>Loading posts</p></li></ol>
+    </div>
+    <article class="post" id="post-view" hidden aria-live="polite"></article>
+  </main>
+
+  <footer class="site">
+    <span>© 2026 Satyender Yadav. Posts CC BY 4.0 unless stated.</span>
+    <span>New post every week. Follow on <a href="https://www.linkedin.com/in/satyenderyadav17">LinkedIn</a></span>
+  </footer>
+</div>
+<script src="assets/marked.umd.js"></script>
+<script>
+(function(){
+'use strict';
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function fmt(d){return new Date(d+'T00:00:00').toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}
+var POSTS=[], tag='';
+var listV=document.getElementById('list-view'), postV=document.getElementById('post-view');
+
+function renderList(){
+  var items=POSTS.filter(function(p){return !tag||p.tags.indexOf(tag)>=0;});
+  document.getElementById('plist').innerHTML=items.map(function(p){
+    return '<li><time datetime="'+esc(p.date)+'">'+fmt(p.date)+'</time><div><h2><a href="#'+esc(p.slug)+'">'+esc(p.title)+'</a>'+(p.draft?'<span class="draft">Draft</span>':'')+'</h2><p>'+esc(p.summary)+'</p><div class="tags">'+p.tags.map(function(t){return '<span class="tag">'+esc(t)+'</span>';}).join('')+'</div></div></li>';
+  }).join('')||'<li><span></span><p>No posts on this topic yet.</p></li>';
+}
+function renderTags(){
+  var all=[];POSTS.forEach(function(p){p.tags.forEach(function(t){if(all.indexOf(t)<0)all.push(t);});});
+  var bar=document.getElementById('tagbar');
+  bar.innerHTML='<button type="button" data-t="" aria-pressed="true">All topics</button>'+all.map(function(t){return '<button type="button" data-t="'+esc(t)+'" aria-pressed="false">'+esc(t)+'</button>';}).join('');
+  bar.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;tag=b.dataset.t;[].forEach.call(bar.children,function(x){x.setAttribute('aria-pressed',x===b);});renderList();});
+}
+function showPost(slug){
+  var p=POSTS.filter(function(x){return x.slug===slug;})[0];
+  if(!p){listV.hidden=false;postV.hidden=true;return;}
+  listV.hidden=true;postV.hidden=false;
+  postV.innerHTML='<a class="back" href="#">All posts</a><p class="muted sans">Loading</p>';
+  fetch(p.file).then(function(r){if(!r.ok)throw 0;return r.text();}).then(function(md){
+    var words=md.split(/\s+/).length, mins=Math.max(1,Math.round(words/220));
+    var html=window.marked?marked.parse(md):'<pre>'+esc(md)+'</pre>';
+    document.title=p.title+' | Satyender Yadav';
+    postV.innerHTML='<a class="back" href="#">All posts</a><h1>'+esc(p.title)+(p.draft?'<span class="draft">Draft</span>':'')+'</h1>'
+      +'<div class="pmeta"><time datetime="'+esc(p.date)+'">'+fmt(p.date)+'</time><span>'+mins+' min read</span><span>'+p.tags.map(esc).join(', ')+'</span></div>'
+      +'<div class="prose">'+html+'</div>'
+      +'<div class="share"><span class="muted">Share this story</span><a href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'">LinkedIn</a><a href="https://bsky.app/intent/compose?text='+encodeURIComponent(p.title+' '+location.href)+'">Bluesky</a><a href="index.html#contact">Reply by email</a></div>';
+    window.scrollTo(0,0);
+  }).catch(function(){postV.innerHTML='<a class="back" href="#">All posts</a><p>This post could not load. Refresh to try again.</p>';});
+}
+function route(){var h=location.hash.replace('#','');if(h)showPost(h);else{document.title='Field notes | Satyender Yadav';listV.hidden=false;postV.hidden=true;}}
+fetch('posts/index.json').then(function(r){return r.json();}).then(function(list){
+  POSTS=list.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
+  renderTags();renderList();route();
+}).catch(function(){document.getElementById('plist').innerHTML='<li><span></span><p>Posts could not load. Refresh to try again.</p></li>';});
+window.addEventListener('hashchange',route);
+})();
+</script>
+</body>
+</html>

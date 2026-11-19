@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Satyender Yadav | Multi-hazard risk, Himalaya, AI for disaster risk reduction</title>
+<meta name="description" content="Satyender Yadav researches landslide, flood and glacial lake outburst flood risk in the Himalaya, and builds AI tools that put disaster risk evidence in practitioners' hands.">
+<meta property="og:title" content="Satyender Yadav | Multi-hazard risk in the Himalaya">
+<meta property="og:description" content="Landslides, floods, glacial lake outbursts: where they strike, who is exposed, and how AI can help people act on the evidence.">
+<meta property="og:type" content="profile">
+<meta name="theme-color" content="#F2F5F4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230F6F6B'/%3E%3Cpath d='M5 20c5-6 9 2 13-4s6-3 9-2' stroke='%23F2F5F4' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Satyender Yadav",
+  "jobTitle":"Researcher, multi-hazard risk assessment",
+  "alumniOf":[{"@type":"CollegeOrUniversity","name":"G.B. Pant University of Agriculture and Technology"},{"@type":"CollegeOrUniversity","name":"Maharana Pratap University of Agriculture and Technology"}],
+  "knowsAbout":["Multi-hazard risk assessment","Landslide susceptibility","Flood hazard","Glacial lake outburst floods","Remote sensing","Google Earth Engine","Retrieval-augmented generation","Disaster risk reduction"],
+  "email":"mailto:satyenderyadav17@gmail.com",
+  "sameAs":["https://scholar.google.com/citations?user=y6TnqXcAAAAJ","https://orcid.org/0009-0008-9498-3699","https://github.com/yadavsatyender","https://www.linkedin.com/in/satyenderyadav17"]
+}
+</script>
+<style>
+/* Hero */
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,56px);align-items:center;padding:clamp(16px,3vw,32px) 0 clamp(36px,5vw,64px)}
+.hero h1{font-weight:740;font-stretch:120%;font-size:clamp(2.8rem,6vw,5.3rem);line-height:.94;letter-spacing:-.03em;margin:0 0 .4em}
+.hero h1 span{display:block}
+.hero .role{font-family:var(--sans);color:var(--scree);margin:0 0 1.3em;font-size:1.0625rem;line-height:1.5}
+.hero .lede{font-size:clamp(1.18rem,1.7vw,1.4rem);line-height:1.45;margin:0 0 1.4em;max-width:32ch}
+.hero .status-line{margin:0 0 1.6em}
+.links{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--sans);font-size:.98rem;margin:0;padding:0;list-style:none;align-items:center}
+
+.globe-wrap{position:relative}
+#globe{position:relative;width:100%;aspect-ratio:1/1;max-height:min(78vh,680px);margin-inline:auto;cursor:grab;touch-action:pan-y}
+#globe:active{cursor:grabbing}
+#globe canvas{display:block}
+.globe-fallback{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--sans);color:var(--scree);font-size:.9rem;text-align:center;padding:20px}
+.globe-ui{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 20px;align-items:center;margin-top:8px}
+.layer-toggles button{display:inline-flex;align-items:center;gap:8px;color:var(--scree)}
+.layer-toggles button[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--contour-major)}
+.layer-toggles button[aria-pressed="false"] .sw{opacity:.3}
+.layer-toggles button:disabled{opacity:.6;cursor:progress}
+.layer-toggles .sw{width:10px;height:10px;border-radius:50%;flex:none}
+.sw.work{background:var(--lake)}
+.sw.event{background:var(--silt-fill)}
+.sw.live{background:#C2463A}
+.globe-info{font-family:var(--sans);font-size:.875rem;color:var(--scree);min-height:2.6em;margin:10px 0 0;max-width:60ch}
+.globe-info b{color:var(--ink);font-weight:600}
+.g-tip{font-family:var(--sans);font-size:13px;line-height:1.35;background:var(--paper);color:var(--ink);border:1px solid var(--rule);border-radius:4px;padding:6px 9px;max-width:240px;box-shadow:0 2px 10px rgba(30,43,42,.12)}
+.g-tip b{display:block;font-weight:600}
+.g-tip span{color:var(--scree)}
+details.globe-list{font-family:var(--sans);font-size:.875rem;margin-top:6px}
+details.globe-list summary{cursor:pointer;color:var(--scree)}
+details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 0}
+
+/* Now band */
+.now{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;padding:18px 0;border-top:1px solid var(--rule);font-family:var(--sans);font-size:1rem}
+.now time{font-weight:650;color:var(--silt);white-space:nowrap}
+.now p{margin:0;flex:1 1 40ch}
+
+/* Research equation */
+.equation{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em .35em;margin:0 0 8px;font-family:var(--sans)}
+.equation .op{font-size:clamp(1.6rem,3.6vw,2.8rem);color:var(--contour-major);font-weight:300;line-height:1}
+.term{appearance:none;background:none;border:0;padding:4px 2px 8px;font:inherit;font-weight:680;font-stretch:108%;font-size:clamp(1.6rem,3.6vw,2.8rem);letter-spacing:-.02em;line-height:1.05;color:var(--contour-major);cursor:pointer;border-bottom:3px solid transparent;transition:color .2s,border-color .2s}
+.term:hover{color:var(--scree)}
+.term[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--lake)}
+.term.act[aria-selected="true"]{border-bottom-color:var(--silt)}
+.eq-hint{font-family:var(--sans);font-size:.9rem;color:var(--scree);margin:0 0 26px}
+.panel{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:clamp(22px,3vw,36px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(20px,4vw,56px)}
+.panel[hidden]{display:none}
+.panel p{margin:0 0 1em;max-width:var(--measure)}
+.panel .big{font-size:1.2rem;line-height:1.5}
+.panel dl{margin:0;font-family:var(--sans);font-size:.9375rem}
+.panel dt{color:var(--scree);margin-top:14px}
+.panel dt:first-child{margin-top:0}
+.panel dd{margin:2px 0 0}
+.panel ul{margin:2px 0 0;padding-left:18px}
+
+/* Map-unit explainer */
+.explain{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,56px);align-items:start}
+.mu-canvas{width:100%;aspect-ratio:8/5;display:block;border-radius:4px;background:var(--r1)}
+.mu-legend{display:flex;gap:0;margin-top:10px;font-family:var(--sans);font-size:.8rem;color:var(--scree)}
+.mu-legend span{flex:1;padding-top:16px;position:relative}
+.mu-legend span::before{content:"";position:absolute;top:0;left:0;right:2px;height:10px;background:var(--c)}
+.mu-controls{display:grid;gap:18px;margin:6px 0 22px}
+.mu-controls fieldset{border:0;padding:0;margin:0}
+.mu-controls legend{font-family:var(--sans);font-size:.9rem;color:var(--scree);margin-bottom:8px;padding:0}
+.readout{font-family:var(--sans);border-top:1px solid var(--rule);padding-top:16px}
+.readout .n{font-size:2.4rem;font-weight:700;font-stretch:110%;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.readout .n.warn{color:var(--silt)}
+.readout p{margin:6px 0 16px;font-size:.95rem;color:var(--scree);max-width:40ch}
+.explain .note{font-size:.95rem}
+
+/* Assistant feature */
+.assist{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:start}
+.assist p{max-width:var(--measure)}
+.pipeline{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;counter-reset:s}
+.pipeline li{position:relative;padding:18px 18px 18px 0;border-top:2px solid var(--ink)}
+.pipeline li+li{padding-left:18px;border-left:1px solid var(--rule)}
+.pipeline .k{display:block;font-family:var(--sans);font-weight:720;font-stretch:115%;font-size:clamp(2rem,3.6vw,3rem);line-height:1;letter-spacing:-.02em;color:var(--lake)}
+.pipeline .d{display:block;font-family:var(--sans);font-size:.95rem;margin-top:8px}
+.assist-meta{font-family:var(--sans);font-size:.95rem;margin-top:22px;color:var(--scree)}
+
+/* Publications */
+.pubs{list-style:none;margin:0;padding:0}
+.pub{display:grid;grid-template-columns:76px minmax(0,1fr);gap:20px;padding:22px 0;border-top:1px solid var(--rule)}
+.pub:first-child{border-top:0;padding-top:0}
+.pub[hidden]{display:none}
+.pub .yr{font-family:var(--sans);font-variant-numeric:tabular-nums;color:var(--scree);font-size:.95rem;padding-top:3px}
+.pub .t{font-family:var(--sans);font-weight:600;font-size:1.06rem;line-height:1.35;margin:0 0 .25em}
+.pub .t a{color:var(--ink);text-decoration:none}
+.pub .t a:hover{color:var(--lake);text-decoration:underline}
+.pub .au{margin:0;font-size:.97rem}
+.pub .au b{font-weight:620}
+.pub .venue{margin:0;font-style:italic;color:var(--scree);font-size:.97rem}
+.pub .acts{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:8px;font-family:var(--sans);font-size:.875rem;align-items:center}
+.pub .acts button{font:inherit;background:none;border:0;padding:0;color:var(--lake);cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.18em}
+.state{font-family:var(--sans);font-size:.75rem;border:1px solid currentColor;border-radius:3px;padding:1px 6px;margin-left:8px;vertical-align:2px;font-weight:500;white-space:nowrap}
+.state.pub-ok{color:var(--lake)}
+.state.wip{color:var(--silt)}
+.copied{font-family:var(--sans);font-size:.875rem;color:var(--lake);min-height:1.4em;margin:0 0 10px}
+.pubgroup{font-family:var(--sans);font-size:1.05rem;font-weight:620;margin:40px 0 16px;padding-top:0}
+
+/* About */
+.about{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(28px,5vw,72px)}
+.tl{list-style:none;margin:0;padding:0;border-left:2px solid var(--rule)}
+.tl li{position:relative;padding:0 0 26px 24px}
+.tl li::before{content:"";position:absolute;left:-7px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--snow);border:2px solid var(--contour-major)}
+.tl li:first-child::before{background:var(--lake);border-color:var(--lake)}
+.tl .when{font-family:var(--sans);font-size:.875rem;color:var(--scree);font-variant-numeric:tabular-nums}
+.tl h3{margin:2px 0 4px;font-size:1.08rem}
+.tl p{margin:0;font-size:.98rem;max-width:var(--measure)}
+.facts dt{font-family:var(--sans);font-weight:620;margin-top:20px}
+.facts dt:first-child{margin-top:0}
+.facts dd{margin:4px 0 0;font-size:.98rem}
+.facts dd+dd{margin-top:8px}
+
+/* Writing + hub teasers */
+.posts{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px)}
+.posts li{border-top:2px solid var(--ink);padding-top:14px}
+.posts time{font-family:var(--sans);font-size:.85rem;color:var(--scree)}
+.posts h3{margin:6px 0 8px}
+.posts h3 a{color:var(--ink);text-decoration:none}
+.posts h3 a:hover{color:var(--lake);text-decoration:underline}
+.posts p{margin:0;font-size:.98rem;color:var(--scree)}
+.hubteaser{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center}
+.hubteaser .stats{display:flex;gap:clamp(20px,4vw,48px);font-family:var(--sans);flex-wrap:wrap}
+.hubteaser .stats b{display:block;font-size:2.2rem;font-weight:720;font-stretch:112%;line-height:1;color:var(--ink)}
+.hubteaser .stats span{font-size:.9rem;color:var(--scree)}
+.hubteaser p{max-width:var(--measure)}
+
+/* Contact */
+.contact{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(20px,4vw,64px)}
+.contact p{max-width:var(--measure);margin:0 0 1em}
+.contact dl{display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px 20px;margin:0;font-family:var(--sans);font-size:.98rem}
+.contact dt{color:var(--scree)}
+.contact dd{margin:0}
+
+@media (max-width:960px){
+  .hero,.explain,.assist,.about,.hubteaser{grid-template-columns:1fr}
+  .panel{grid-template-columns:1fr}
+  .posts{grid-template-columns:1fr 1fr}
+  .contact{grid-template-columns:1fr;gap:14px}
+  #globe{max-width:560px}
+}
+@media (max-width:720px){
+  .pipeline{grid-template-columns:1fr}
+  .pipeline li+li{padding-left:0;border-left:0}
+  .posts{grid-template-columns:1fr}
+  .pub{grid-template-columns:1fr;gap:4px}
+  .contact dl{grid-template-columns:1fr;gap:2px}
+  .contact dd{margin-bottom:10px}
+  details.globe-list ul{columns:1}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Satyender Yadav</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="hub.html">Hazard Hub</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="hero">
+      <div>
+        <h1><span>Satyender</span><span>Yadav</span></h1>
+        <p class="role">Multi-hazard risk researcher. Volunteer, Disaster Risk Reduction Unit, UNESCO.<br>M.Tech, Soil and Water Conservation Engineering, GBPUAT.</p>
+        <p class="lede">I map where landslides, floods and glacial lake outbursts are likely in the Himalaya, who lives in their path, and how AI can put that evidence in practitioners' hands.</p>
+        <!-- EDIT: change if your situation changes -->
+        <p class="status-line">Looking for a PhD position starting in 2027</p>
+        <ul class="links">
+          <li><a class="btn" href="cv.pdf">Download CV (PDF)</a></li>
+          <li><a href="https://scholar.google.com/citations?user=y6TnqXcAAAAJ">Google Scholar</a></li>
+          <li><a href="https://orcid.org/0009-0008-9498-3699">ORCID</a></li>
+          <li><a href="https://github.com/yadavsatyender">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/satyenderyadav17">LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <div class="globe-wrap">
+        <div id="globe" role="img" aria-label="Interactive globe of Satyender Yadav's study regions, collaborations and major mountain hazard disasters. A text list follows below."><div class="globe-fallback" id="globe-fallback">Loading the globe</div></div>
+        <div class="globe-ui">
+          <div class="chips layer-toggles" role="group" aria-label="Globe layers">
+            <button type="button" data-layer="work" aria-pressed="true"><span class="sw work"></span>My research and network</button>
+            <button type="button" data-layer="events" aria-pressed="true"><span class="sw event"></span>Major disasters, 2010 to 2025</button>
+            <button type="button" data-layer="live" aria-pressed="false"><span class="sw live"></span>Live NASA events</button>
+          </div>
+        </div>
+        <p class="globe-info" id="globe-info" aria-live="polite">Drag to turn the globe. Hover or tap a point for details.</p>
+        <details class="globe-list"><summary>View the globe as a list</summary><div id="globe-list"></div></details>
+      </div>
+    </div>
+
+    <div class="now">
+      <time datetime="2026-11-24">24 Nov 2026</time>
+      <p>I present an AI research assistant for landslide science at the 7th World Landslide Forum, Faridabad (Session 1.1, paper A676). <a href="blog.html#wlf7-ai-research-assistant">Read the story</a></p>
+    </div>
+
+    <!-- RESEARCH -->
+    <section id="research" aria-labelledby="research-h">
+      <div class="sec-head">
+        <h2 id="research-h">Research</h2>
+        <p>Disaster risk is not just the hazard. Following the IPCC framework, my work moves through each term of the risk equation, and then asks what it takes for people to act on the result.</p>
+      </div>
+      <div class="equation" role="tablist" aria-label="Risk equation">
+        <button class="term" role="tab" id="t-h" aria-controls="p-h" aria-selected="true">Hazard</button><span class="op" aria-hidden="true">×</span>
+        <button class="term" role="tab" id="t-e" aria-controls="p-e" aria-selected="false" tabindex="-1">Exposure</button><span class="op" aria-hidden="true">×</span>
+        <button class="term" role="tab" id="t-v" aria-controls="p-v" aria-selected="false" tabindex="-1">Vulnerability</button><span class="op" aria-hidden="true">=</span>
+        <button class="term" role="tab" id="t-r" aria-controls="p-r" aria-selected="false" tabindex="-1">Risk</button><span class="op" aria-hidden="true">→</span>
+        <button class="term act" role="tab" id="t-a" aria-controls="p-a" aria-selected="false" tabindex="-1">Action</button>
+      </div>
+      <p class="eq-hint">Select a term to see the questions, methods and outputs behind it.</p>
+
+      <div class="panel" role="tabpanel" id="p-h" aria-labelledby="t-h" tabindex="0">
+        <div>
+          <h3>Where are landslides, floods and outburst floods likely?</h3>
+          <p class="big">I build and compare susceptibility models for data-scarce mountain districts, from terrain, rainfall, geology and land cover, and test them against thousands of recorded landslides.</p>
+          <p>A recurring finding: the choice of method and of map unit can change which places look dangerous. That is why I report uncertainty alongside every map.</p>
+        </div>
+        <dl>
+          <dt>Methods</dt><dd>AHP and Fuzzy-AHP, Google Earth Engine, ROC-AUC with bootstrap validation</dd>
+          <dt>Outputs</dt><dd><ul><li>Garhwal landslide susceptibility, <i>Earth Systems and Environment</i> 2026</li><li>Kumaon AHP vs Fuzzy-AHP, preprint 2026</li><li>Flood susceptibility uncertainty, EGU 2026</li><li>GLOF susceptibility and downstream propagation, AGU26</li></ul></dd>
+          <dt>Data</dt><dd>Sentinel-1 and 2, NASADEM, CHIRPS, GSI landslide inventory</dd>
+        </dl>
+      </div>
+      <div class="panel" role="tabpanel" id="p-e" aria-labelledby="t-e" tabindex="0" hidden>
+        <div>
+          <h3>Who and what sits in harm's way?</h3>
+          <p class="big">Population and infrastructure layered over the hazard maps for every subdistrict, including the highways that keep mountain districts connected.</p>
+        </div>
+        <dl>
+          <dt>Methods</dt><dd>Gridded population, road and settlement layers, zonal statistics</dd>
+          <dt>Outputs</dt><dd>Exposure component of the Uttarakhand multi-hazard risk index; highway resilience talk, CARH 2025, NIDM New Delhi</dd>
+        </dl>
+      </div>
+      <div class="panel" role="tabpanel" id="p-v" aria-labelledby="t-v" tabindex="0" hidden>
+        <div>
+          <h3>Who is least able to cope?</h3>
+          <p class="big">Exposure is not destiny. A 20-indicator social vulnerability index captures who is least able to prepare for, cope with and recover from a disaster.</p>
+        </div>
+        <dl>
+          <dt>Methods</dt><dd>Indicator selection, normalisation and weighting, census-based social data</dd>
+          <dt>Outputs</dt><dd>Social vulnerability index for 111 subdistricts of Uttarakhand</dd>
+        </dl>
+      </div>
+      <div class="panel" role="tabpanel" id="p-r" aria-labelledby="t-r" tabindex="0" hidden>
+        <div>
+          <h3>Bringing it together</h3>
+          <p class="big">A composite multi-hazard risk index for all 111 subdistricts of Uttarakhand, combining landslide, flood and GLOF susceptibility with exposure and social vulnerability. 41.4% of subdistricts fall in the high or very high risk classes.</p>
+          <p>A companion framework adds drought to rapid-onset hazards for the Indian Himalaya.</p>
+        </div>
+        <dl>
+          <dt>Framework</dt><dd>IPCC hazard, exposure and vulnerability</dd>
+          <dt>Outputs</dt><dd><ul><li>Manuscript under review, <i>Sustainable Development</i>, with Alex de Sherbinin</li><li>Composite mapping including drought, AIWC 2025, Western Sydney University</li></ul></dd>
+        </dl>
+      </div>
+      <div class="panel" role="tabpanel" id="p-a" aria-labelledby="t-a" tabindex="0" hidden>
+        <div>
+          <h3>From evidence to action</h3>
+          <p class="big">Research only reduces risk when practitioners can find and trust it. For UNESCO and the International Consortium on Landslides I built an AI research assistant that answers questions from the peer-reviewed literature, in 12 languages, with every source cited.</p>
+          <p><a href="#assistant">More on the assistant</a></p>
+        </div>
+        <dl>
+          <dt>Methods</dt><dd>Retrieval-augmented generation, vector search, serverless deployment on Cloudflare</dd>
+          <dt>Outputs</dt><dd>Launch at the 7th World Landslide Forum, 2026; public release planned on the ICL website</dd>
+          <dt>Training</dt><dd>UNDRR masterclass on AI for multi-hazard early warning, 2026</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- MAP UNIT EXPLAINER -->
+    <section id="map-unit" aria-labelledby="mu-h">
+      <div class="sec-head">
+        <h2 id="mu-h">Why the map unit matters</h2>
+        <p>Hazard maps for planning are usually reported by administrative unit. Averaging inside large units can hide small, very dangerous slopes. Try it below, on a synthetic landscape.</p>
+      </div>
+      <div class="explain">
+        <figure style="margin:0">
+          <canvas class="mu-canvas" id="mu" width="960" height="600" role="img" aria-label="Synthetic susceptibility map. Changes as you choose map unit and statistic."></canvas>
+          <div class="mu-legend" aria-hidden="true">
+            <span style="--c:var(--r1)">Very low</span><span style="--c:var(--r2)">Low</span><span style="--c:var(--r3)">Moderate</span><span style="--c:var(--r4)">High</span><span style="--c:var(--r5)">Very high</span>
+          </div>
+        </figure>
+        <div>
+          <div class="mu-controls">
+            <fieldset>
+              <legend>Map unit</legend>
+              <div class="chips" data-group="unit">
+                <button type="button" data-v="pixel" aria-pressed="false">30 m pixels</button>
+                <button type="button" data-v="small" aria-pressed="false">Small units</button>
+                <button type="button" data-v="large" aria-pressed="true">Subdistricts</button>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Summary statistic per unit</legend>
+              <div class="chips" data-group="stat">
+                <button type="button" data-v="mean" aria-pressed="true">Mean</button>
+                <button type="button" data-v="p90" aria-pressed="false">90th percentile</button>
+              </div>
+            </fieldset>
+          </div>
+          <div class="readout" aria-live="polite">
+            <div class="n" id="mu-n1">–</div>
+            <p>of the very high susceptibility land still shows as very high on this map.</p>
+            <div class="n" id="mu-n2">–</div>
+            <p id="mu-l2">units hide a very high hotspot behind a moderate or lower class.</p>
+          </div>
+          <p class="note muted">In the Kumaon Himalaya, mean-based aggregation underclassified localized high-susceptibility zones in 24 of 53 subdistricts. <a href="https://www.preprints.org/manuscript/202606.2088">Read the preprint</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI ASSISTANT -->
+    <section id="assistant" aria-labelledby="as-h">
+      <div class="assist">
+        <div>
+          <h2 id="as-h" style="margin-bottom:20px">An AI research assistant for landslide science</h2>
+          <p>Decades of landslide research sit in papers that practitioners rarely have time to search. With UNESCO's Disaster Risk Reduction Unit and the International Consortium on Landslides, I designed and built a retrieval-augmented assistant that answers questions from that literature and shows exactly where each answer comes from.</p>
+          <p>It is in live testing ahead of public release on the ICL website, and I present it at the 7th World Landslide Forum on 24 November 2026, with Soichiro Yasukawa, Shinji Sassa and Matjaž Mikoš.</p>
+          <p><a class="btn ghost" href="blog.html#wlf7-ai-research-assistant">Read how I built it</a></p>
+        </div>
+        <div>
+          <ol class="pipeline" aria-label="How the assistant works">
+            <li><span class="k">202</span><span class="d">peer-reviewed articles indexed</span></li>
+            <li><span class="k">970+</span><span class="d">searchable passages, found by meaning rather than keywords</span></li>
+            <li><span class="k">12</span><span class="d">languages, with every answer linked to its sources</span></li>
+          </ol>
+          <p class="assist-meta">Built with retrieval-augmented generation, vector embeddings and Cloudflare Workers.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications" aria-labelledby="pub-h">
+      <div class="sec-head">
+        <h2 id="pub-h">Publications and talks</h2>
+        <p>Current list also on <a href="https://scholar.google.com/citations?user=y6TnqXcAAAAJ">Google Scholar</a> and <a href="https://orcid.org/0009-0008-9498-3699">ORCID</a>.</p>
+      </div>
+      <div class="chips" role="group" aria-label="Filter" id="pub-filter" style="margin-bottom:22px">
+        <button type="button" data-f="all" aria-pressed="true">All</button>
+        <button type="button" data-f="paper" aria-pressed="false">Papers and preprints</button>
+        <button type="button" data-f="talk" aria-pressed="false">Talks and posters</button>
+      </div>
+      <p class="copied" id="copy-status" role="status"></p>
+      <ol class="pubs">
+        <li class="pub" data-k="paper">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t"><a href="https://doi.org/10.1007/s41748-026-01263-8">Integrated multi-criteria decision-making analysis for sub-district scale landslide susceptibility zonation in the Garhwal Himalaya</a><span class="state pub-ok">Published</span></p>
+            <p class="au"><b>Yadav, S.</b>, Kumar, P., and Islam, M. S.</p>
+            <p class="venue">Earth Systems and Environment</p>
+            <div class="acts"><a href="https://doi.org/10.1007/s41748-026-01263-8">DOI</a><button type="button" data-bib="@article{yadav2026garhwal,&#10;  title={Integrated Multi-Criteria Decision-Making Analysis for Sub-District Scale Landslide Susceptibility Zonation in the Garhwal Himalaya},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Islam, M. S.},&#10;  journal={Earth Systems and Environment},&#10;  year={2026},&#10;  doi={10.1007/s41748-026-01263-8}&#10;}">Copy BibTeX</button></div>
+          </div>
+        </li>
+        <li class="pub" data-k="paper">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t"><a href="https://www.preprints.org/manuscript/202606.2088">Landslide susceptibility zonation and aggregation-scale sensitivity across sub-districts of the Kumaon Himalaya: a comparative analysis using AHP and Fuzzy-AHP framework</a><span class="state wip">Preprint</span></p>
+            <p class="au"><b>Yadav, S.</b>, Kumar, P., Vishwakarma, D. K., Al-Mutiry, M., and Abdo, H. G.</p>
+            <p class="venue">Preprints.org, not yet peer reviewed</p>
+            <div class="acts"><a href="https://doi.org/10.20944/preprints202606.2088.v1">DOI</a><a href="https://www.preprints.org/manuscript/202606.2088">Read the preprint</a><button type="button" data-bib="@article{yadav2026kumaon,&#10;  title={Landslide Susceptibility Zonation and Aggregation-Scale Sensitivity Across Sub-Districts of the Kumaon Himalaya: A Comparative Analysis Using AHP and Fuzzy-AHP Framework},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Vishwakarma, Dinesh Kumar and Al-Mutiry, Motrih and Abdo, Hazem Ghassan},&#10;  journal={Preprints},&#10;  year={2026},&#10;  doi={10.20944/preprints202606.2088.v1}&#10;}">Copy BibTeX</button></div>
+          </div>
+        </li>
+        <li class="pub" data-k="paper">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t">Multi-hazard risk assessment in Indian Himalaya: integrating hazard susceptibility, exposure, and social vulnerability<span class="state wip">Under review</span></p>
+            <p class="au"><b>Yadav, S.</b>, Kumar, P., de Sherbinin, A. M., and Islam, M. S.</p>
+            <p class="venue">Sustainable Development</p>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t">Bridging landslide science and practice with AI: a retrieval-augmented research assistant for progress in landslide research and technology<span class="state wip">Oral, 24 Nov</span></p>
+            <p class="au"><b>Yadav, S.</b>, Yasukawa, S., Sassa, S., and Mikoš, M.</p>
+            <p class="venue">7th World Landslide Forum, Amrita Vishwa Vidyapeetham, Faridabad, India. Session 1.1, paper A676</p>
+            <div class="acts"><a href="blog.html#wlf7-ai-research-assistant">Story behind the talk</a></div>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t">Quantifying glacial lake outburst flood susceptibility and downstream hazard propagation in the Central Himalaya: an Earth observation framework<span class="state wip">Oral, accepted</span></p>
+            <p class="au"><b>Yadav, S.</b>, and Kumar, P.</p>
+            <p class="venue">AGU Annual Meeting 2026 (AGU26), San Francisco. Session C41A</p>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t"><a href="https://doi.org/10.5194/egusphere-egu26-20654">Quantifying uncertainty in Himalayan flood susceptibility mapping: a comparative analysis of AHP and fuzzy AHP in Rudraprayag District, Uttarakhand</a></p>
+            <p class="au"><b>Yadav, S.</b>, and Kumar, P.</p>
+            <p class="venue">EGU General Assembly 2026, Vienna. Oral</p>
+            <div class="acts"><a href="https://doi.org/10.5194/egusphere-egu26-20654">Abstract</a></div>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2026</span>
+          <div>
+            <p class="t">Enhancing landslide susceptibility mapping through comparative AHP and FAHP approaches: a case study from the Kumaon Himalaya</p>
+            <p class="au"><b>Yadav, S.</b>, and Kumar, P.</p>
+            <p class="venue">Roorkee Water Conclave 2026, IIT Roorkee. Poster</p>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2025</span>
+          <div>
+            <p class="t">Integrating rapid-onset hydro-meteorological hazards and drought risks: a sub-district scale composite mapping framework for the Indian Himalayas</p>
+            <p class="au"><b>Yadav, S.</b>, and Kumar, P.</p>
+            <p class="venue">AIWC International Symposium 2025, Western Sydney University. Oral</p>
+          </div>
+        </li>
+        <li class="pub" data-k="talk">
+          <span class="yr">2025</span>
+          <div>
+            <p class="t">Tehsil-level landslide susceptibility assessment in the Garhwal Himalaya for climate-adaptive highway resilience</p>
+            <p class="au"><b>Yadav, S.</b>, and Kumar, P.</p>
+            <p class="venue">CARH 2025, NIDM, New Delhi. Oral</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" aria-labelledby="about-h">
+      <div class="sec-head">
+        <h2 id="about-h">About</h2>
+        <p>I trained as an agricultural and soil and water conservation engineer, and came to hazards through watersheds: the same slopes and rivers that feed farms also fail and flood. I now work at the point where geospatial science meets disaster risk policy.</p>
+      </div>
+      <div class="about">
+        <ol class="tl" aria-label="Experience, most recent first">
+          <li><span class="when">Mar 2026 to present</span><h3>Volunteer, Disaster Risk Reduction Unit, UNESCO</h3><p>Natural Sciences Sector, Paris (remote). Built the AI research assistant for UNESCO and ICL; supports literature synthesis and digital workflows across the unit.</p></li>
+          <li><span class="when">Aug 2023 to Oct 2025</span><h3>Graduate researcher, GBPUAT Pantnagar</h3><p>Integrated geospatial framework for climate and land-use hazards in Uttarakhand and Rajasthan; multi-hazard risk index for 111 subdistricts.</p></li>
+          <li><span class="when">Mar to Apr 2025</span><h3>International research intern, DEFIAA programme</h3><p>Agricampus 66, Théza, France. One of 20 students selected for the Indo-French exchange funded by the French Ministry of Agriculture.</p></li>
+          <li><span class="when">Aug 2024 to Jun 2025</span><h3>Teaching assistant, GBPUAT</h3><p>Lab tutorials in soil and water conservation engineering and watershed hydrology; mentored final-year projects.</p></li>
+        </ol>
+        <dl class="facts">
+          <dt>Education</dt>
+          <dd>M.Tech, Soil and Water Conservation Engineering, GBPUAT, 2025. First division with distinction</dd>
+          <dd>B.Tech, Agricultural Engineering, MPUAT Udaipur, 2023</dd>
+          <dt>Honours</dt>
+          <dd>Ministry of Education postgraduate scholarship, Government of India</dd>
+          <dd>GATE All India Rank 184 (2025)</dd>
+          <dt>Leadership</dt>
+          <dd>Central Students' Union President, MPUAT, 2022 to 2023</dd>
+          <dt>Memberships</dt>
+          <dd>AGU, EGU, IAHS, APECS, IWRA</dd>
+          <dt>Tools</dt>
+          <dd>Python, Google Earth Engine, QGIS, SWAT, openLISEM, RAG and vector search, Cloudflare Workers</dd>
+        </dl>
+      </div>
+    </section>
+
+    <!-- BLOG TEASER -->
+    <section id="writing" aria-labelledby="w-h">
+      <div class="sec-head">
+        <h2 id="w-h">Field notes</h2>
+        <p>A weekly story from research and practice: what worked, what failed, and what I learned. <a href="blog.html">All posts</a></p>
+      </div>
+      <ul class="posts" id="latest-posts"><li><h3><a href="blog.html">Read the blog</a></h3></li></ul>
+    </section>
+
+    <!-- HUB TEASER -->
+    <section id="hub" aria-labelledby="hub-h">
+      <div class="hubteaser">
+        <div>
+          <h2 id="hub-h" style="margin-bottom:18px">Hazard Hub</h2>
+          <p>An open, growing catalogue of the datasets people working on hydroclimatic extremes and multi-hazard risk actually use, with Earth Engine snippets, citations and a live watch on rainfall and river flow in the Himalaya.</p>
+          <p><a class="btn" href="hub.html">Open Hazard Hub</a></p>
+        </div>
+        <div class="stats" id="hub-stats" aria-label="Hazard Hub at a glance">
+          <div><b id="hs-n">44</b><span>open datasets</span></div>
+          <div><b id="hs-g">15</b><span>ready for Earth Engine</span></div>
+          <div><b>2</b><span>live feeds</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" aria-labelledby="contact-h">
+      <div class="contact">
+        <h2 id="contact-h">Contact</h2>
+        <div>
+          <p>I am glad to hear from supervisors, researchers and practitioners working on mountain hazards, hydroclimatic extremes or disaster risk reduction.</p>
+          <dl>
+            <dt>Email</dt><dd><a href="mailto:satyenderyadav17@gmail.com">satyenderyadav17@gmail.com</a></dd>
+            <dt>Based in</dt><dd>India, working remotely with UNESCO, Paris</dd>
+            <dt>Elsewhere</dt><dd><a href="https://scholar.google.com/citations?user=y6TnqXcAAAAJ">Google Scholar</a>, <a href="https://orcid.org/0009-0008-9498-3699">ORCID</a>, <a href="https://github.com/yadavsatyender">GitHub</a>, <a href="https://www.linkedin.com/in/satyenderyadav17">LinkedIn</a></dd>
+          </dl>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <span>© 2026 Satyender Yadav</span>
+    <span>Globe: Natural Earth via world-atlas, globe.gl. Live events: NASA EONET. Last updated November 2026</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+/* ---------- Research equation tabs ---------- */
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.term'));
+  function sel(t,focus){
+    tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on;});
+    if(focus)t.focus();
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener('click',function(){sel(t);});
+    t.addEventListener('keydown',function(e){
+      var n=null;
+      if(e.key==='ArrowRight')n=tabs[(i+1)%tabs.length];
+      if(e.key==='ArrowLeft')n=tabs[(i-1+tabs.length)%tabs.length];
+      if(e.key==='Home')n=tabs[0]; if(e.key==='End')n=tabs[tabs.length-1];
+      if(n){e.preventDefault();sel(n,true);}
+    });
+  });
+})();
+
+/* ---------- Publications filter + BibTeX ---------- */
+(function(){
+  var bs=[].slice.call(document.querySelectorAll('#pub-filter button')), ps=[].slice.call(document.querySelectorAll('.pub'));
+  bs.forEach(function(b){b.addEventListener('click',function(){
+    bs.forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+    ps.forEach(function(p){p.hidden=!(b.dataset.f==='all'||p.dataset.k===b.dataset.f);});
+  });});
+  var st=document.getElementById('copy-status');
+  document.querySelectorAll('[data-bib]').forEach(function(b){b.addEventListener('click',function(){
+    var fail=function(){st.textContent='Your browser blocked copying. Use the DOI page to export the citation.';};
+    try{navigator.clipboard.writeText(b.getAttribute('data-bib')).then(function(){st.textContent='BibTeX copied.';setTimeout(function(){st.textContent='';},2500);},fail);}catch(e){fail();}
+  });});
+})();
+
+/* ---------- Map-unit (MAUP) explainer ---------- */
+(function(){
+  var cv=document.getElementById('mu'); if(!cv||!cv.getContext)return;
+  var ctx=cv.getContext('2d'), W=96, H=60;
+  var seed=11; function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;}
+  // Synthetic susceptibility: broad regional gradient plus narrow valley hotspots
+  var f=new Float32Array(W*H), i, x, y;
+  var blobs=[]; for(i=0;i<9;i++)blobs.push({x:rnd()*W,y:rnd()*H,s:8+rnd()*14,a:.25+rnd()*.25});
+  var hots=[]; for(i=0;i<14;i++)hots.push({x:rnd()*W,y:rnd()*H,s:1.4+rnd()*2.2,a:.55+rnd()*.35});
+  for(y=0;y<H;y++)for(x=0;x<W;x++){
+    var v=.18+.22*(x/W)+.08*Math.sin(y/7+x/11);
+    blobs.forEach(function(b){var d=(x-b.x)*(x-b.x)+(y-b.y)*(y-b.y);v+=b.a*Math.exp(-d/(2*b.s*b.s));});
+    hots.forEach(function(b){var d=(x-b.x)*(x-b.x)+(y-b.y)*(y-b.y);v+=b.a*Math.exp(-d/(2*b.s*b.s));});
+    f[y*W+x]=v;
+  }
+  var sorted=Array.prototype.slice.call(f).sort(function(a,b){return a-b;});
+  var q=[.35,.6,.8,.93].map(function(p){return sorted[Math.floor(p*sorted.length)];});
+  function cls(v){var c=0;while(c<4&&v>=q[c])c++;return c;}
+  // Irregular units: Voronoi with jittered metric
+  function units(n){
+    var s=[];for(var k=0;k<n;k++)s.push([rnd()*W,rnd()*H,.8+rnd()*.5]);
+    var a=new Int16Array(W*H);
+    for(var yy=0;yy<H;yy++)for(var xx=0;xx<W;xx++){
+      var best=1e9,bi=0;
+      var wx=xx+3.2*Math.sin(yy*.23)+1.6*Math.sin(yy*.61+1.3), wy=yy+3.2*Math.cos(xx*.19)+1.6*Math.sin(xx*.53+.7);
+      for(var k2=0;k2<n;k2++){var dx=wx-s[k2][0],dy=wy-s[k2][1];var d=(dx*dx+dy*dy)*s[k2][2];if(d<best){best=d;bi=k2;}}
+      a[yy*W+xx]=bi;
+    }
+    return {n:n,a:a};
+  }
+  var U={small:units(60),large:units(12)};
+  var state={unit:'large',stat:'mean'};
+  function draw(){
+    var colors=[css('--r1'),css('--r2'),css('--r3'),css('--r4'),css('--r5')];
+    var shown=new Int8Array(W*H), u=state.unit==='pixel'?null:U[state.unit], hidden=0, nUnits=u?u.n:0;
+    if(!u){for(i=0;i<W*H;i++)shown[i]=cls(f[i]);}
+    else{
+      var vals=[];for(i=0;i<u.n;i++)vals.push([]);
+      for(i=0;i<W*H;i++)vals[u.a[i]].push(f[i]);
+      var uc=vals.map(function(arr){
+        if(!arr.length)return 0;
+        var v;
+        if(state.stat==='mean'){v=arr.reduce(function(s,z){return s+z;},0)/arr.length;}
+        else{var b=arr.slice().sort(function(a,b){return a-b;});v=b[Math.floor(.9*(b.length-1))];}
+        return cls(v);
+      });
+      for(i=0;i<W*H;i++)shown[i]=uc[u.a[i]];
+      vals.forEach(function(arr,k){
+        var vh=arr.filter(function(z){return z>=q[3];}).length;
+        if(vh>=3&&uc[k]<=2)hidden++;
+      });
+    }
+    var cw=cv.width/W, ch=cv.height/H;
+    for(y=0;y<H;y++)for(x=0;x<W;x++){ctx.fillStyle=colors[shown[y*W+x]];ctx.fillRect(Math.floor(x*cw),Math.floor(y*ch),Math.ceil(cw),Math.ceil(ch));}
+    if(u){
+      ctx.fillStyle=css('--snow');
+      for(y=0;y<H;y++)for(x=0;x<W;x++){
+        var k=u.a[y*W+x];
+        if(x<W-1&&u.a[y*W+x+1]!==k)ctx.fillRect(Math.floor((x+1)*cw)-1,Math.floor(y*ch),2,Math.ceil(ch));
+        if(y<H-1&&u.a[(y+1)*W+x]!==k)ctx.fillRect(Math.floor(x*cw),Math.floor((y+1)*ch)-1,Math.ceil(cw),2);
+      }
+    }
+    var vhTot=0,vhKept=0;
+    for(i=0;i<W*H;i++)if(f[i]>=q[3]){vhTot++;if(shown[i]===4)vhKept++;}
+    var pct=Math.round(100*vhKept/vhTot);
+    var n1=document.getElementById('mu-n1'), n2=document.getElementById('mu-n2');
+    n1.textContent=pct+'%'; n1.className='n'+(pct<60?' warn':'');
+    if(u){n2.textContent=hidden+' of '+nUnits;n2.className='n'+(hidden?' warn':'');document.getElementById('mu-l2').textContent='units hide a very high hotspot behind a moderate or lower class.';}
+    else{n2.textContent='0';n2.className='n';document.getElementById('mu-l2').textContent='hotspots hidden, because nothing is averaged away. But planners cannot act pixel by pixel.';}
+  }
+  document.querySelectorAll('.mu-controls .chips').forEach(function(g){
+    var bs=[].slice.call(g.querySelectorAll('button'));
+    bs.forEach(function(b){b.addEventListener('click',function(){
+      bs.forEach(function(x){x.setAttribute('aria-pressed',x===b);});
+      state[g.dataset.group]=b.dataset.v; draw();
+    });});
+  });
+  draw();
+  if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw);
+})();
+
+/* ---------- Latest blog posts ---------- */
+fetch('posts/index.json').then(function(r){return r.json();}).then(function(list){
+  var el=document.getElementById('latest-posts');
+  list=list.slice().sort(function(a,b){return b.date.localeCompare(a.date);}).slice(0,3);
+  el.innerHTML=list.map(function(p){
+    var d=new Date(p.date+'T00:00:00');
+    return '<li><time datetime="'+esc(p.date)+'">'+d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})+'</time><h3><a href="blog.html#'+esc(p.slug)+'">'+esc(p.title)+'</a></h3><p>'+esc(p.summary)+'</p></li>';
+  }).join('');
+}).catch(function(){});
+
+/* ---------- Hub stats ---------- */
+fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(function(d){
+  document.getElementById('hs-n').textContent=d.length;
+  document.getElementById('hs-g').textContent=d.filter(function(x){return x.gee;}).length;
+}).catch(function(){});
+
+/* ---------- Globe ---------- */
+(function(){
+  var el=document.getElementById('globe'), fb=document.getElementById('globe-fallback'), info=document.getElementById('globe-info');
+  function webgl(){try{var c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));}catch(e){return false;}}
+  function load(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+  var data=null, world=null, layers={work:true,events:true,live:false}, live=[];
+
+  function listView(ev){
+    var h='<ul>';
+    h+='<li><b>'+esc(ev.home.name)+'</b>: '+esc(ev.home.note)+'</li>';
+    ev.work.concat(ev.network).forEach(function(p){h+='<li><b>'+esc(p.name)+'</b>: '+esc(p.note)+'</li>';});
+    ev.events.forEach(function(p){h+='<li><b>'+esc(p.name)+', '+p.year+'</b>: '+esc(p.kind)+'. '+esc(p.note)+'</li>';});
+    document.getElementById('globe-list').innerHTML=h+'</ul>';
+  }
+  function tip(d){
+    if(d.live)return '<div class="g-tip"><b>'+esc(d.name)+'</b><span>'+esc(d.kind)+', live from NASA EONET</span></div>';
+    if(d.year)return '<div class="g-tip"><b>'+esc(d.name)+', '+d.year+'</b><span>'+esc(d.kind)+'. '+esc(d.note)+'</span></div>';
+    return '<div class="g-tip"><b>'+esc(d.name)+'</b><span>'+esc(d.note)+'</span></div>';
+  }
+  function say(d){
+    if(!d)return;
+    info.innerHTML=d.year?'<b>'+esc(d.name)+', '+d.year+'.</b> '+esc(d.kind)+'. '+esc(d.note):(d.live?'<b>'+esc(d.name)+'.</b> '+esc(d.kind)+', open event reported by NASA EONET.':'<b>'+esc(d.name)+'.</b> '+esc(d.note));
+  }
+  function render(){
+    if(!world||!data)return;
+    var lake=css('--lake'), silt=css('--silt-fill'), ink=css('--ink');
+    var pts=[];
+    if(layers.work){
+      pts.push(Object.assign({c:lake,r:.62,alt:.035},data.home));
+      data.work.forEach(function(p){pts.push(Object.assign({c:lake,r:.32,alt:.02},p));});
+      data.network.forEach(function(p){pts.push(Object.assign({c:ink,r:.3,alt:.015},p));});
+    }
+    if(layers.events)data.events.forEach(function(p){pts.push(Object.assign({c:silt,r:.38,alt:.012},p));});
+    if(layers.live)live.forEach(function(p){pts.push(Object.assign({c:'#C2463A',r:.34,alt:.01},p));});
+    world.pointsData(pts);
+    var rings=[];
+    if(layers.work)rings.push({lat:data.home.lat,lng:data.home.lng,c:lake,max:5,speed:1.2,rep:1400});
+    if(layers.events)data.events.forEach(function(p){rings.push({lat:p.lat,lng:p.lng,c:silt,max:2.2,speed:.8,rep:2600+Math.random()*1800});});
+    world.ringsData(reduce?[]:rings);
+    world.arcsData(layers.work?data.network.map(function(p){return {startLat:data.home.lat,startLng:data.home.lng,endLat:p.lat,endLng:p.lng};}):[]);
+  }
+  function hexToRgba(h,a){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')';}
+
+  function start(){
+    if(!webgl()){fb.textContent='Your browser cannot show the 3D globe. The list below has the same information.';
+      fetch('assets/data/events.json').then(function(r){return r.json();}).then(listView);return;}
+    Promise.all([load('assets/globe.gl.min.js'),load('assets/topojson-client.min.js')]).then(function(){
+      return Promise.all([fetch('assets/data/countries-110m.json').then(function(r){return r.json();}),fetch('assets/data/events.json').then(function(r){return r.json();})]);
+    }).then(function(res){
+      var topo=res[0]; data=res[1]; listView(data);
+      var countries=topojson.feature(topo,topo.objects.countries).features.filter(function(c){return c.id!=='010';});
+      countries.forEach(function(c){var g=c.geometry;if(g&&g.type==='MultiPolygon'){g.coordinates=g.coordinates.filter(function(poly){var u={};poly[0].forEach(function(pt){u[pt[0]+','+pt[1]]=1;});return Object.keys(u).length>=3;});}});
+      fb.remove();
+      var dark=matchMedia('(prefers-color-scheme: dark)').matches;
+      world=new Globe(el,{animateIn:!reduce})
+        .backgroundColor('rgba(0,0,0,0)')
+        .width(el.clientWidth).height(el.clientHeight)
+        .showAtmosphere(true).atmosphereColor(css('--lake-fill')).atmosphereAltitude(.14)
+        .hexPolygonsData(countries).hexPolygonResolution(3).hexPolygonMargin(.42).hexPolygonUseDots(true)
+        .hexPolygonColor(function(){return css('--contour-major');})
+        .pointLat('lat').pointLng('lng').pointColor('c').pointRadius('r').pointAltitude('alt').pointResolution(16)
+        .pointLabel(tip).onPointHover(function(d){el.style.cursor=d?'pointer':'grab';if(d)say(d);}).onPointClick(say)
+        .ringColor(function(d){return function(t){return hexToRgba(d.c,1-t);};}).ringMaxRadius('max').ringPropagationSpeed('speed').ringRepeatPeriod('rep')
+        .arcColor(function(){return [hexToRgba(css('--lake'),.15),hexToRgba(css('--lake'),.75)];})
+        .arcStroke(.35).arcAltitudeAutoScale(.35)
+        .arcDashLength(.5).arcDashGap(.2).arcDashAnimateTime(reduce?0:4200);
+      var m=world.globeMaterial(); m.color.set(dark?'#1B2C2B':'#E7EFEC'); if(m.emissive){m.emissive.set(css('--snow'));m.emissiveIntensity=dark?.25:.55;} m.shininess=4;
+      var c=world.controls(); c.enableZoom=false; c.autoRotate=!reduce; c.autoRotateSpeed=.32;
+      el.addEventListener('pointerdown',function(){c.autoRotate=false;});
+      world.pointOfView({lat:24,lng:78,altitude:2.05},0);
+      render();
+      new ResizeObserver(function(){world.width(el.clientWidth).height(el.clientHeight);}).observe(el);
+      if(window.matchMedia)matchMedia('(prefers-color-scheme: dark)').addEventListener('change',function(){world.hexPolygonColor(function(){return css('--contour-major');});m.color.set(matchMedia('(prefers-color-scheme: dark)').matches?'#1B2C2B':'#E7EFEC');render();});
+    }).catch(function(){fb.textContent='The globe could not load. The list below has the same information.';
+      fetch('assets/data/events.json').then(function(r){return r.json();}).then(listView).catch(function(){});});
+  }
+  function liveFetch(){
+    return fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=30&category=floods,landslides,severeStorms&limit=80')
+      .then(function(r){if(!r.ok)throw 0;return r.json();})
+      .then(function(j){
+        live=(j.events||[]).map(function(e){
+          var g=e.geometry&&e.geometry[e.geometry.length-1]; if(!g)return null;
+          var c=g.type==='Point'?g.coordinates:(g.coordinates&&g.coordinates[0]&&g.coordinates[0][0]);
+          if(!c)return null;
+          return {name:e.title,kind:(e.categories&&e.categories[0]&&e.categories[0].title)||'Event',lat:c[1],lng:c[0],live:true};
+        }).filter(Boolean);
+        return live.length;
+      });
+  }
+  document.querySelectorAll('.layer-toggles button').forEach(function(b){b.addEventListener('click',function(){
+    var k=b.dataset.layer, on=b.getAttribute('aria-pressed')!=='true';
+    if(k==='live'&&on&&!live.length){
+      b.disabled=true; info.textContent='Loading live events from NASA EONET';
+      liveFetch().then(function(n){b.disabled=false;layers.live=true;b.setAttribute('aria-pressed','true');info.textContent=n+' open flood, landslide and storm events from the last 30 days.';render();})
+      .catch(function(){b.disabled=false;info.textContent='Live events could not load here. They appear on the published website, where the page can reach NASA.';});
+      return;
+    }
+    layers[k]=on; b.setAttribute('aria-pressed',on); render();
+  });});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting;})){io.disconnect();start();}},{rootMargin:'200px'});io.observe(el);
+  } else start();
+})();
+})();
+</script>
+</body>
+</html>

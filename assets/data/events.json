@@ -1,0 +1,40 @@
+{
+  "home": {"name": "Uttarakhand Himalaya", "lat": 30.07, "lng": 79.1, "note": "Main study region: multi-hazard risk across 111 subdistricts"},
+  "work": [
+    {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "note": "Landslide susceptibility, 58 subdistricts. Published 2026, Earth Systems and Environment"},
+    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "AHP vs Fuzzy-AHP and map-unit sensitivity, 53 subdistricts. Preprint 2026"},
+    {"name": "Rudraprayag district", "lat": 30.28, "lng": 78.98, "note": "Flood susceptibility uncertainty. EGU General Assembly 2026"},
+    {"name": "GBPUAT, Pantnagar", "lat": 29.02, "lng": 79.48, "note": "M.Tech, Soil and Water Conservation Engineering, 2023 to 2025"},
+    {"name": "MPUAT, Udaipur", "lat": 24.59, "lng": 73.71, "note": "B.Tech, Agricultural Engineering, 2019 to 2023"}
+  ],
+  "network": [
+    {"name": "UNESCO, Paris", "lat": 48.85, "lng": 2.31, "note": "Volunteer, Disaster Risk Reduction Unit, since March 2026"},
+    {"name": "ICL, Kyoto", "lat": 35.03, "lng": 135.78, "note": "International Consortium on Landslides: partner for the AI research assistant"},
+    {"name": "University of Ljubljana", "lat": 46.05, "lng": 14.5, "note": "Co-author on the WLF7 AI assistant paper"},
+    {"name": "Columbia University, New York", "lat": 41.0, "lng": -73.92, "note": "Co-author on the multi-hazard risk manuscript"},
+    {"name": "EGU General Assembly, Vienna", "lat": 48.23, "lng": 16.41, "note": "Oral talk, 2026"},
+    {"name": "AGU26, San Francisco", "lat": 37.78, "lng": -122.4, "note": "Oral talk accepted, session C41A, December 2026"},
+    {"name": "Western Sydney University", "lat": -33.8, "lng": 150.9, "note": "Oral talk, AIWC International Symposium 2025"},
+    {"name": "World Landslide Forum, Faridabad", "lat": 28.41, "lng": 77.31, "note": "Oral talk launching the AI research assistant, 24 November 2026"},
+    {"name": "Agricampus 66, Théza", "lat": 42.63, "lng": 2.95, "note": "DEFIAA international research internship, 2025"}
+  ],
+  "events": [
+    {"name": "Kedarnath disaster", "year": 2013, "kind": "Flood and debris flow", "lat": 30.73, "lng": 79.07, "note": "Extreme rainfall and the breach of Chorabari Lake"},
+    {"name": "Chamoli disaster", "year": 2021, "kind": "Rock–ice avalanche", "lat": 30.37, "lng": 79.73, "note": "Avalanche from Ronti Peak turned into a debris flow that destroyed two hydropower projects"},
+    {"name": "Joshimath subsidence", "year": 2023, "kind": "Land subsidence", "lat": 30.56, "lng": 79.56, "note": "Cracking ground forced evacuations across the town"},
+    {"name": "South Lhonak GLOF", "year": 2023, "kind": "Glacial lake outburst flood", "lat": 27.91, "lng": 88.19, "note": "Outburst flood down the Teesta breached the Chungthang dam"},
+    {"name": "Dharali flash flood", "year": 2025, "kind": "Flash flood and debris flow", "lat": 31.04, "lng": 78.79, "note": "Debris flow on the Kheer Ganga, Uttarkashi"},
+    {"name": "Wayanad landslides", "year": 2024, "kind": "Debris flows", "lat": 11.47, "lng": 76.13, "note": "Rainfall-triggered debris flows at Mundakkai and Chooralmala"},
+    {"name": "Thame GLOF", "year": 2024, "kind": "Glacial lake outburst flood", "lat": 27.83, "lng": 86.65, "note": "Outburst flood destroyed much of Thame village, Nepal"},
+    {"name": "Melamchi flood", "year": 2021, "kind": "Cascading flood", "lat": 27.83, "lng": 85.57, "note": "Flood and debris flow along the Melamchi River, Nepal"},
+    {"name": "Attabad landslide", "year": 2010, "kind": "Landslide dam", "lat": 36.32, "lng": 74.82, "note": "Landslide dammed the Hunza River and formed Attabad Lake"},
+    {"name": "Pakistan floods", "year": 2022, "kind": "Monsoon flood", "lat": 26.5, "lng": 68.0, "note": "Prolonged monsoon flooding across the Indus basin"},
+    {"name": "Blatten glacier collapse", "year": 2025, "kind": "Glacier collapse", "lat": 46.42, "lng": 7.82, "note": "Collapse of the Birch Glacier buried most of the village"},
+    {"name": "Ahr valley floods", "year": 2021, "kind": "Flash flood", "lat": 50.53, "lng": 7.1, "note": "Extreme rainfall and flash flooding in western Germany"},
+    {"name": "Valencia floods", "year": 2024, "kind": "Flash flood", "lat": 39.42, "lng": -0.42, "note": "Flash floods from a cut-off low (DANA)"},
+    {"name": "Derna dam failures", "year": 2023, "kind": "Flood and dam failure", "lat": 32.76, "lng": 22.64, "note": "Storm Daniel rainfall caused two dams to fail"},
+    {"name": "Enga landslide", "year": 2024, "kind": "Landslide", "lat": -5.35, "lng": 143.4, "note": "Large landslide buried Yambali village, Papua New Guinea"},
+    {"name": "Xinmo landslide", "year": 2017, "kind": "Rock avalanche", "lat": 32.07, "lng": 103.66, "note": "Rock avalanche buried Xinmo village, Sichuan"},
+    {"name": "Oso landslide", "year": 2014, "kind": "Landslide", "lat": 48.28, "lng": -121.85, "note": "Landslide across the North Fork Stillaguamish River, Washington"}
+  ]
+}
