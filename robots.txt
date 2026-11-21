@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yadavsatyender.github.io/sitemap.xml
