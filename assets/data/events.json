@@ -1,21 +1,21 @@
 {
-  "home": {"name": "Uttarakhand Himalaya", "lat": 30.07, "lng": 79.1, "note": "Main study region: multi-hazard risk across 111 subdistricts"},
+  "home": {"name": "Uttarakhand Himalaya", "lat": 30.07, "lng": 79.1, "note": "Main study region: multi-hazard risk across 111 subdistricts", "link": "#research", "linkText": "See the research"},
   "work": [
-    {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "note": "Landslide susceptibility, 58 subdistricts. Published 2026, Earth Systems and Environment"},
-    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "Map-unit sensitivity of AHP and Fuzzy-AHP landslide models, 53 subdistricts. Manuscript submitted; preprint 2026"},
-    {"name": "Rudraprayag district", "lat": 30.28, "lng": 78.98, "note": "Flood susceptibility uncertainty. EGU General Assembly 2026"},
+    {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "note": "Landslide susceptibility, 58 subdistricts. Published 2026, Earth Systems and Environment", "link": "papers/garhwal-2026.html", "linkText": "Read the paper summary"},
+    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "Map-unit sensitivity of AHP and Fuzzy-AHP landslide models, 53 subdistricts. Manuscript submitted; preprint 2026", "link": "papers/kumaon-2026.html", "linkText": "Read the preprint summary"},
+    {"name": "Rudraprayag district", "lat": 30.28, "lng": 78.98, "note": "Flood susceptibility uncertainty. EGU General Assembly 2026", "link": "https://doi.org/10.5194/egusphere-egu26-20654", "linkText": "Read the EGU abstract"},
     {"name": "G.B. Pant University of Agriculture and Technology, Pantnagar", "lat": 29.02, "lng": 79.48, "note": "M.Tech, Soil and Water Conservation Engineering, 2023 to 2025"},
     {"name": "Maharana Pratap University of Agriculture and Technology, Udaipur", "lat": 24.59, "lng": 73.71, "note": "B.Tech, Agricultural Engineering, 2019 to 2023"}
   ],
   "network": [
-    {"name": "UNESCO, Paris", "lat": 48.85, "lng": 2.31, "note": "Volunteer, Disaster Risk Reduction Unit, since March 2026"},
-    {"name": "ICL, Kyoto", "lat": 35.03, "lng": 135.78, "note": "International Consortium on Landslides: partner for the AI research assistant"},
-    {"name": "University of Ljubljana", "lat": 46.05, "lng": 14.5, "note": "Co-author on the WLF7 AI assistant paper"},
+    {"name": "UNESCO, Paris", "lat": 48.85, "lng": 2.31, "note": "Volunteer, Disaster Risk Reduction Unit, since March 2026", "link": "#assistant", "linkText": "About the AI assistant"},
+    {"name": "ICL, Kyoto", "lat": 35.03, "lng": 135.78, "note": "International Consortium on Landslides: partner for the AI research assistant", "link": "#assistant", "linkText": "About the AI assistant"},
+    {"name": "University of Ljubljana", "lat": 46.05, "lng": 14.5, "note": "Co-author on the WLF7 AI assistant paper", "link": "blog.html#wlf7-ai-research-assistant", "linkText": "The story behind the talk"},
     {"name": "Columbia University, New York", "lat": 41.0, "lng": -73.92, "note": "Co-author on the multi-hazard risk manuscript"},
-    {"name": "EGU General Assembly, Vienna", "lat": 48.23, "lng": 16.41, "note": "Oral talk, 2026"},
-    {"name": "AGU26, San Francisco", "lat": 37.78, "lng": -122.4, "note": "Oral talk, session C41A, 10 December 2026"},
+    {"name": "EGU General Assembly, Vienna", "lat": 48.23, "lng": 16.41, "note": "Oral talk, 2026", "link": "https://doi.org/10.5194/egusphere-egu26-20654", "linkText": "Read the EGU abstract"},
+    {"name": "AGU26, San Francisco", "lat": 37.78, "lng": -122.4, "note": "Oral talk, session C41A, 10 December 2026", "link": "#talk-agu26", "linkText": "Talk details"},
     {"name": "Western Sydney University", "lat": -33.8, "lng": 150.9, "note": "Oral talk, Australia–India Water Centre (AIWC) International Symposium 2025"},
-    {"name": "World Landslide Forum, Faridabad", "lat": 28.41, "lng": 77.31, "note": "Oral talk launching the AI research assistant, 24 November 2026"},
+    {"name": "World Landslide Forum, Faridabad", "lat": 28.41, "lng": 77.31, "note": "Oral talk launching the AI research assistant, 24 November 2026", "link": "blog.html#wlf7-ai-research-assistant", "linkText": "The story behind the talk"},
     {"name": "Agricampus 66, Théza", "lat": 42.63, "lng": 2.95, "note": "DEFIAA international research internship, 2025"}
   ],
   "events": [
@@ -36,5 +36,14 @@
     {"name": "Enga landslide", "year": 2024, "kind": "Landslide", "lat": -5.35, "lng": 143.4, "note": "Large landslide buried Yambali village, Papua New Guinea"},
     {"name": "Xinmo landslide", "year": 2017, "kind": "Rock avalanche", "lat": 32.07, "lng": 103.66, "note": "Rock avalanche buried Xinmo village, Sichuan"},
     {"name": "Oso landslide", "year": 2014, "kind": "Landslide", "lat": 48.28, "lng": -121.85, "note": "Landslide across the North Fork Stillaguamish River, Washington"}
+  ],
+  "tour": [
+    {"name": "Uttarakhand Himalaya", "lat": 30.07, "lng": 79.1, "alt": 1.15, "text": "My main study region. I map landslide, flood and glacial lake outburst hazards together with who is exposed and how vulnerable they are, across all 111 subdistricts.", "link": "#research", "linkText": "See the research"},
+    {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "alt": 0.75, "text": "Landslide susceptibility for 58 subdistricts, tested against 3,484 recorded landslides. Published in Earth Systems and Environment, 2026.", "link": "papers/garhwal-2026.html", "linkText": "Read the paper summary"},
+    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "alt": 0.75, "text": "Does averaging hide danger? In 24 of 53 subdistricts, mean-based maps under-classified local landslide hotspots.", "link": "papers/kumaon-2026.html", "linkText": "Read the preprint summary"},
+    {"name": "Kedarnath, 2013", "lat": 30.73, "lng": 79.07, "alt": 0.7, "text": "Extreme rainfall and the breach of Chorabari Lake caused a devastating flood and debris flow, a reminder of how rain, ice and steep valleys combine."},
+    {"name": "Chamoli, 2021", "lat": 30.37, "lng": 79.73, "alt": 0.7, "text": "An avalanche from Ronti Peak turned into a debris flow that destroyed two hydropower projects: a cascading hazard that single-hazard maps miss."},
+    {"name": "South Lhonak, 2023", "lat": 27.91, "lng": 88.19, "alt": 0.95, "text": "A glacial lake outburst flood down the Teesta breached the Chungthang dam. Outbursts like this are the subject of my AGU26 talk on glacial lake susceptibility and downstream hazard.", "link": "#talk-agu26", "linkText": "Talk details"},
+    {"name": "UNESCO, Paris", "lat": 48.85, "lng": 2.31, "alt": 2.1, "text": "With UNESCO's Disaster Risk Reduction Unit and the International Consortium on Landslides, I built an AI assistant that answers questions from the landslide literature with every source cited.", "link": "#assistant", "linkText": "About the AI assistant"}
   ]
 }
