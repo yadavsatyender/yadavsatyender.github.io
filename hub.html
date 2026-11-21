@@ -129,9 +129,9 @@
         <p class="by">Curated by Satyender Yadav. Free to use, and open to contributions.</p>
       </div>
       <div class="counts" aria-label="Hub at a glance">
-        <div><b id="c-all">44</b><span>datasets</span></div>
-        <div><b id="c-gee">15</b><span>in Earth Engine</span></div>
-        <div><b id="c-api">7</b><span>with an API</span></div>
+        <div><b id="c-all">58</b><span>datasets</span></div>
+        <div><b id="c-gee">20</b><span>in Earth Engine</span></div>
+        <div><b id="c-api">9</b><span>with an API</span></div>
       </div>
     </div>
 
@@ -245,7 +245,7 @@ function render(){
     if(f.hazard&&d.hazards.indexOf(f.hazard)<0)return false;
     if(f.access&&d.access.indexOf(f.access)<0)return false;
     if(!toks.length)return true;
-    var hay=(d.name+' '+d.provider+' '+d.desc+' '+d.group+' '+d.coverage+' '+d.hazards.map(function(h){return HZ[h];}).join(' ')).toLowerCase();
+    var hay=(d.name+' '+d.provider+' '+d.desc+' '+d.group+' '+d.coverage+' '+(d.licence||'')+' '+d.hazards.map(function(h){return HZ[h];}).join(' ')).toLowerCase();
     return toks.every(function(t){return hay.indexOf(t)>=0;});
   });
   lastCount=list.length;
@@ -258,7 +258,7 @@ function render(){
       var i=DS.indexOf(d);
       out+='<article class="ds"><div><p class="nm"><a href="'+esc(d.url)+'">'+esc(d.name)+'</a></p><p class="pv">'+esc(d.provider)+'</p><p class="de">'+esc(d.desc)+'</p>'
         +'<div class="tags">'+d.hazards.map(function(h){return '<span class="tag '+h+'">'+HZ[h]+'</span>';}).join('')+d.access.map(function(a){return '<span class="tag">'+AC[a]+'</span>';}).join('')+'</div></div>'
-        +'<dl class="meta"><dt>Coverage</dt><dd>'+esc(d.coverage)+'</dd><dt>Resolution</dt><dd>'+esc(d.resolution)+'</dd><dt>Period</dt><dd>'+esc(d.period)+'</dd>'+(d.gee?'<dt>Earth Engine</dt><dd><code style="font-size:.82rem;word-break:break-all">'+esc(d.gee)+'</code></dd>':'')+'</dl>'
+        +'<dl class="meta"><dt>Coverage</dt><dd>'+esc(d.coverage)+'</dd><dt>Resolution</dt><dd>'+esc(d.resolution)+'</dd><dt>Period</dt><dd>'+esc(d.period)+'</dd><dt>Licence</dt><dd>'+(d.licence?esc(d.licence):'See the provider\'s terms')+'</dd>'+(d.gee?'<dt>Earth Engine</dt><dd><code style="font-size:.82rem;word-break:break-all">'+esc(d.gee)+'</code></dd>':'')+'</dl>'
         +'<div class="acts"><a href="'+esc(d.url)+'">Open dataset</a>'+(d.gee?'<button type="button" data-snip="'+i+'" data-track="Copy Earth Engine code" data-track-detail="'+esc(d.name)+'">Copy Earth Engine code</button>':'')+(d.paper&&d.paper!==d.url?'<a href="'+esc(d.paper)+'">Paper</a>':'')+'</div></article>';
     });
     out+='</div>';
