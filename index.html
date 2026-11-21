@@ -440,7 +440,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <p class="t"><a href="https://doi.org/10.1007/s41748-026-01263-8">Integrated multi-criteria decision-making analysis for sub-district scale landslide susceptibility zonation in the Garhwal Himalaya</a><span class="state pub-ok">Published</span></p>
             <p class="au"><b>Yadav, S.</b>, Kumar, P., and Islam, M. S.</p>
             <p class="venue">Earth Systems and Environment</p>
-            <div class="acts"><a href="https://doi.org/10.1007/s41748-026-01263-8">DOI</a><button type="button" data-track="Copy BibTeX" data-track-detail="Garhwal 2026 (ESE)" data-bib="@article{yadav2026garhwal,&#10;  title={Integrated Multi-Criteria Decision-Making Analysis for Sub-District Scale Landslide Susceptibility Zonation in the Garhwal Himalaya},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Islam, M. S.},&#10;  journal={Earth Systems and Environment},&#10;  year={2026},&#10;  doi={10.1007/s41748-026-01263-8}&#10;}">Copy BibTeX</button></div>
+            <div class="acts"><a href="papers/garhwal-2026.html">Read the summary</a><a href="https://doi.org/10.1007/s41748-026-01263-8">DOI</a><button type="button" data-track="Copy BibTeX" data-track-detail="Garhwal 2026 (ESE)" data-bib="@article{yadav2026garhwal,&#10;  title={Integrated Multi-Criteria Decision-Making Analysis for Sub-District Scale Landslide Susceptibility Zonation in the Garhwal Himalaya},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Islam, Md Sariful},&#10;  journal={Earth Systems and Environment},&#10;  volume={10},&#10;  number={9},&#10;  year={2026},&#10;  doi={10.1007/s41748-026-01263-8}&#10;}">Copy BibTeX</button></div>
           </div>
         </li>
         <li class="pub" data-k="paper">
@@ -450,7 +450,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <p class="au"><b>Yadav, S.</b>, Kumar, P., Kisi, O., and Vishwakarma, D. K.</p>
             <p class="venue">Modeling Earth Systems and Environment</p>
             <p class="rel">Related preprint: <a href="https://www.preprints.org/manuscript/202606.2088"><cite>Landslide susceptibility zonation and aggregation-scale sensitivity across sub-districts of the Kumaon Himalaya</cite></a>. Yadav, Kumar, Vishwakarma, Al-Mutiry and Abdo, Preprints.org, 2026, not peer reviewed.</p>
-            <div class="acts"><a href="https://doi.org/10.20944/preprints202606.2088.v1">Preprint DOI</a><button type="button" data-track="Copy BibTeX" data-track-detail="Kumaon 2026 (preprint)" data-bib="@article{yadav2026kumaon,&#10;  title={Landslide Susceptibility Zonation and Aggregation-Scale Sensitivity Across Sub-Districts of the Kumaon Himalaya: A Comparative Analysis Using AHP and Fuzzy-AHP Framework},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Vishwakarma, Dinesh Kumar and Al-Mutiry, Motrih and Abdo, Hazem Ghassan},&#10;  journal={Preprints},&#10;  year={2026},&#10;  doi={10.20944/preprints202606.2088.v1}&#10;}">Copy preprint BibTeX</button></div>
+            <div class="acts"><a href="papers/kumaon-2026.html">Read the preprint summary</a><a href="https://doi.org/10.20944/preprints202606.2088.v1">Preprint DOI</a><button type="button" data-track="Copy BibTeX" data-track-detail="Kumaon 2026 (preprint)" data-bib="@article{yadav2026kumaon,&#10;  title={Landslide Susceptibility Zonation and Aggregation-Scale Sensitivity Across Sub-Districts of the Kumaon Himalaya: A Comparative Analysis Using AHP and Fuzzy-AHP Framework},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Vishwakarma, Dinesh Kumar and Al-Mutiry, Motrih and Abdo, Hazem Ghassan},&#10;  journal={Preprints},&#10;  year={2026},&#10;  doi={10.20944/preprints202606.2088.v1}&#10;}">Copy preprint BibTeX</button></div>
           </div>
         </li>
         <li class="pub" data-k="paper">
@@ -676,7 +676,8 @@ function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp
   });});
   var st=document.getElementById('copy-status');
   document.querySelectorAll('[data-bib]').forEach(function(b){b.addEventListener('click',function(){
-    var fail=function(){st.textContent='Your browser blocked copying. Use the DOI page to export the citation.';};
+    var old=function(text){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);return ok;};
+    var fail=function(){st.textContent=old(b.getAttribute('data-bib'))?'BibTeX copied.':'Your browser blocked copying. Use the DOI page to export the citation.';};
     try{navigator.clipboard.writeText(b.getAttribute('data-bib')).then(function(){st.textContent='BibTeX copied.';setTimeout(function(){st.textContent='';},2500);},fail);}catch(e){fail();}
   });});
 })();
