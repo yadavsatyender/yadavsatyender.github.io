@@ -2,7 +2,7 @@
   "home": {"name": "Uttarakhand Himalaya", "lat": 30.07, "lng": 79.1, "note": "Main study region: multi-hazard risk across 111 subdistricts"},
   "work": [
     {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "note": "Landslide susceptibility, 58 subdistricts. Published 2026, Earth Systems and Environment"},
-    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "AHP vs Fuzzy-AHP and map-unit sensitivity, 53 subdistricts. Preprint 2026"},
+    {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "AHP vs Fuzzy-AHP and map-unit sensitivity, 53 subdistricts. Preprint 2026; manuscript submitted"},
     {"name": "Rudraprayag district", "lat": 30.28, "lng": 78.98, "note": "Flood susceptibility uncertainty. EGU General Assembly 2026"},
     {"name": "GBPUAT, Pantnagar", "lat": 29.02, "lng": 79.48, "note": "M.Tech, Soil and Water Conservation Engineering, 2023 to 2025"},
     {"name": "MPUAT, Udaipur", "lat": 24.59, "lng": 73.71, "note": "B.Tech, Agricultural Engineering, 2019 to 2023"}
