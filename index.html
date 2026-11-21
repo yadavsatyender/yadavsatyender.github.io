@@ -59,10 +59,16 @@ details.globe-list{font-family:var(--sans);font-size:.875rem;margin-top:6px}
 details.globe-list summary{cursor:pointer;color:var(--scree)}
 details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 0}
 
-/* Now band */
-.now{display:flex;gap:18px;align-items:baseline;flex-wrap:wrap;padding:18px 0;border-top:1px solid var(--rule);font-family:var(--sans);font-size:1rem}
-.now time{font-weight:650;color:var(--silt);white-space:nowrap}
-.now p{margin:0;flex:1 1 40ch}
+/* News */
+.news{padding:20px 0 24px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:1rem}
+.news h2{font-size:1rem;font-stretch:100%;font-weight:650;letter-spacing:0;margin:0 0 8px}
+.news-list{list-style:none;margin:0;padding:0}
+.news-list li{display:grid;grid-template-columns:7.5em minmax(0,1fr);gap:2px 18px;padding:7px 0}
+.news-list time{font-weight:650;color:var(--silt);white-space:nowrap;font-variant-numeric:tabular-nums}
+.news-list p{margin:0;max-width:72ch}
+.news-list .state{margin-left:0;margin-right:8px;vertical-align:1px}
+.news-more summary{cursor:pointer;color:var(--lake);font-size:.9375rem;margin-top:6px;width:max-content}
+.news-more[open] summary{margin-bottom:4px}
 
 /* Research equation */
 .equation{display:flex;flex-wrap:wrap;align-items:baseline;gap:.15em .35em;margin:0 0 8px;font-family:var(--sans)}
@@ -184,6 +190,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
   #globe{max-width:560px}
 }
 @media (max-width:720px){
+  .news-list li{grid-template-columns:1fr;gap:0;padding:8px 0}
   .pipeline{grid-template-columns:1fr}
   .pipeline li+li{padding-left:0;border-left:0}
   .posts{grid-template-columns:1fr}
@@ -242,9 +249,24 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
       </div>
     </div>
 
-    <div class="now" data-track-section="News: WLF7 talk">
-      <time datetime="2026-11-24">24 Nov 2026</time>
-      <p>I present an AI research assistant for landslide science at the 7th World Landslide Forum, Faridabad (Session 1.1, paper A676). <a href="blog.html#wlf7-ai-research-assistant">Read the story</a></p>
+    <div class="news" data-track-section="News" role="region" aria-labelledby="news-h">
+      <h2 id="news-h">News</h2>
+      <ol class="news-list">
+        <li data-date="2026-12-10"><time datetime="2026-12-10">10 Dec 2026</time><p>Oral talk at AGU26 in San Francisco on glacial lake outburst flood susceptibility and downstream hazard in the Central Himalaya (abstract C41A-07). <a href="#talk-agu26">Talk details</a></p></li>
+        <li data-date="2026-11-24"><time datetime="2026-11-24">24 Nov 2026</time><p>Oral talk at the 7th World Landslide Forum in Faridabad, India, introducing an AI research assistant for landslide science (Session 1.1). <a href="blog.html#wlf7-ai-research-assistant">The story behind it</a></p></li>
+        <li><time datetime="2026-11-19">19 Nov 2026</time><p>New field note: why I built a source-citing research assistant for landslide science. <a href="blog.html#wlf7-ai-research-assistant">Read it</a></p></li>
+        <li><time datetime="2026-10">Oct 2026</time><p>IELTS Academic, overall band 7.5.</p></li>
+        <li><time datetime="2026-06-29">29 Jun 2026</time><p>Preprint on aggregation-scale sensitivity in landslide susceptibility mapping across the Kumaon Himalaya, posted on Preprints.org. <a href="https://www.preprints.org/manuscript/202606.2088">Read the preprint</a></p></li>
+        <li><time datetime="2026-06-02">2 Jun 2026</time><p>Paper on sub-district landslide susceptibility in the Garhwal Himalaya published in <i>Earth Systems and Environment</i>. <a href="https://doi.org/10.1007/s41748-026-01263-8">Read the paper</a></p></li>
+      </ol>
+      <details class="news-more">
+        <summary data-track="News" data-track-detail="Earlier news">Earlier news</summary>
+        <ol class="news-list">
+          <li><time datetime="2026-05">May 2026</time><p>Oral talk at the EGU General Assembly in Vienna on uncertainty in flood susceptibility mapping for Rudraprayag District, Uttarakhand. <a href="https://doi.org/10.5194/egusphere-egu26-20654">Abstract</a></p></li>
+          <li><time datetime="2026-03">Mar 2026</time><p>Joined the Disaster Risk Reduction Unit of UNESCO's Natural Sciences Sector as a volunteer. <a href="#assistant">What I built there</a></p></li>
+          <li><time datetime="2025-10">Oct 2025</time><p>Completed my M.Tech in Soil and Water Conservation Engineering at GBPUAT, Pantnagar, with distinction.</p></li>
+        </ol>
+      </details>
     </div>
 
     <!-- RESEARCH -->
@@ -430,7 +452,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <div class="acts"><a href="blog.html#wlf7-ai-research-assistant">Story behind the talk</a></div>
           </div>
         </li>
-        <li class="pub" data-k="talk">
+        <li class="pub" data-k="talk" id="talk-agu26">
           <span class="yr">2026</span>
           <div>
             <p class="t">Quantifying glacial lake outburst flood susceptibility and downstream hazard propagation in the Central Himalaya: an Earth observation framework<span class="state wip">Oral, 10 Dec</span></p>
@@ -591,6 +613,15 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
   </footer>
 </div>
 
+<script>
+(function(){
+  var today=new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll('.news-list li[data-date]').forEach(function(li){
+    var d=new Date(li.getAttribute('data-date')+'T00:00:00');
+    if(d>=today){var b=document.createElement('span');b.className='state wip';b.textContent='Upcoming';li.querySelector('p').prepend(b,' ');}
+  });
+})();
+</script>
 <script>
 (function(){
 'use strict';
