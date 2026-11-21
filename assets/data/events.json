@@ -4,8 +4,8 @@
     {"name": "Garhwal Himalaya", "lat": 30.4, "lng": 78.9, "note": "Landslide susceptibility, 58 subdistricts. Published 2026, Earth Systems and Environment"},
     {"name": "Kumaon Himalaya", "lat": 29.6, "lng": 79.8, "note": "Map-unit sensitivity of AHP and Fuzzy-AHP landslide models, 53 subdistricts. Manuscript submitted; preprint 2026"},
     {"name": "Rudraprayag district", "lat": 30.28, "lng": 78.98, "note": "Flood susceptibility uncertainty. EGU General Assembly 2026"},
-    {"name": "GBPUAT, Pantnagar", "lat": 29.02, "lng": 79.48, "note": "M.Tech, Soil and Water Conservation Engineering, 2023 to 2025"},
-    {"name": "MPUAT, Udaipur", "lat": 24.59, "lng": 73.71, "note": "B.Tech, Agricultural Engineering, 2019 to 2023"}
+    {"name": "G.B. Pant University of Agriculture and Technology, Pantnagar", "lat": 29.02, "lng": 79.48, "note": "M.Tech, Soil and Water Conservation Engineering, 2023 to 2025"},
+    {"name": "Maharana Pratap University of Agriculture and Technology, Udaipur", "lat": 24.59, "lng": 73.71, "note": "B.Tech, Agricultural Engineering, 2019 to 2023"}
   ],
   "network": [
     {"name": "UNESCO, Paris", "lat": 48.85, "lng": 2.31, "note": "Volunteer, Disaster Risk Reduction Unit, since March 2026"},
@@ -14,7 +14,7 @@
     {"name": "Columbia University, New York", "lat": 41.0, "lng": -73.92, "note": "Co-author on the multi-hazard risk manuscript"},
     {"name": "EGU General Assembly, Vienna", "lat": 48.23, "lng": 16.41, "note": "Oral talk, 2026"},
     {"name": "AGU26, San Francisco", "lat": 37.78, "lng": -122.4, "note": "Oral talk, session C41A, 10 December 2026"},
-    {"name": "Western Sydney University", "lat": -33.8, "lng": 150.9, "note": "Oral talk, AIWC International Symposium 2025"},
+    {"name": "Western Sydney University", "lat": -33.8, "lng": 150.9, "note": "Oral talk, Australia–India Water Centre (AIWC) International Symposium 2025"},
     {"name": "World Landslide Forum, Faridabad", "lat": 28.41, "lng": 77.31, "note": "Oral talk launching the AI research assistant, 24 November 2026"},
     {"name": "Agricampus 66, Théza", "lat": 42.63, "lng": 2.95, "note": "DEFIAA international research internship, 2025"}
   ],
