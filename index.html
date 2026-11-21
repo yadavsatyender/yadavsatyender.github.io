@@ -61,12 +61,32 @@
 .layer-toggles button:disabled{opacity:.6;cursor:progress}
 .layer-toggles .sw{width:10px;height:10px;border-radius:50%;flex:none}
 .sw.work{background:var(--lake)}
-.sw.event{background:var(--silt-fill)}
+.sw.event{background:linear-gradient(90deg,var(--hz-flood) 0 33%,var(--hz-landslide) 33% 66%,var(--hz-ice) 66%)}
 .sw.live{background:#C2463A}
 .globe-info{font-family:var(--sans);font-size:.875rem;color:var(--scree);min-height:2.6em;margin:10px 0 0;max-width:60ch}
 .globe-info b{color:var(--ink);font-weight:600}
 .globe-info a{margin-left:.35em;white-space:nowrap}
 .tour-start{font-size:.9rem;padding:.42em .95em}
+:root{--hz-flood:#2B6CB0;--hz-landslide:#9A5E2E;--hz-ice:#7B5EA7;--hz-subsidence:#6E7876}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--hz-flood:#7FB0E3;--hz-landslide:#D2A866;--hz-ice:#B5A2E0;--hz-subsidence:#A3ADAB}}
+:root[data-theme="dark"]{--hz-flood:#7FB0E3;--hz-landslide:#D2A866;--hz-ice:#B5A2E0;--hz-subsidence:#A3ADAB}
+.globe-stage{position:relative}
+.globe-zoom{position:absolute;right:6px;bottom:8px;display:flex;gap:4px;font-family:var(--sans);z-index:2}
+.globe-zoom[hidden]{display:none}
+.globe-zoom button{font:inherit;font-size:.8125rem;min-width:34px;height:32px;padding:0 10px;border:1px solid var(--rule);border-radius:4px;background:var(--paper);color:var(--ink);cursor:pointer}
+.globe-zoom button:hover{border-color:var(--contour-major)}
+.globe-zoom button[data-view="in"],.globe-zoom button[data-view="out"]{font-size:1.05rem;padding:0}
+.globe-time{margin-top:10px;font-family:var(--sans);font-size:.875rem;color:var(--scree)}
+.globe-time[hidden]{display:none}
+.hz-legend{display:flex;flex-wrap:wrap;gap:4px 16px;list-style:none;margin:0 0 8px;padding:0}
+.hz-legend li{display:inline-flex;align-items:center;gap:6px}
+.hz-legend .sw{width:10px;height:10px;border-radius:50%;flex:none}
+.yr{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.yr label{white-space:nowrap}
+.yr output{font-weight:650;color:var(--ink);font-variant-numeric:tabular-nums}
+.yr input[type=range]{flex:1 1 180px;min-width:140px;accent-color:var(--lake)}
+.tl-play{font:inherit;font-size:.875rem;background:none;border:1px solid var(--rule);border-radius:999px;padding:.3em .85em;color:var(--ink);cursor:pointer}
+.tl-play:hover{border-color:var(--contour-major)}
 .tour-start[hidden],.tour[hidden],#tour-link[hidden]{display:none}
 .tour{margin:12px 0 0;padding:16px 18px;border:1px solid var(--rule);border-left:3px solid var(--lake);border-radius:6px;background:var(--paper);font-family:var(--sans);max-width:60ch}
 .tour-step{margin:0 0 4px;font-size:.8125rem;color:var(--scree)}
@@ -268,7 +288,12 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
       </div>
 
       <div class="globe-wrap">
+        <div class="globe-stage">
         <div id="globe" role="img" aria-label="Interactive globe of Satyender Yadav's study regions, collaborations and major mountain hazard disasters. A text list follows below."><div class="globe-fallback" id="globe-fallback">Loading the globe</div></div>
+        <div class="globe-zoom" id="globe-zoom" role="group" aria-label="Globe view" hidden data-track-group="Globe view">
+          <button type="button" data-view="himalaya">Himalaya</button><button type="button" data-view="world">World</button><button type="button" data-view="in" aria-label="Zoom in">+</button><button type="button" data-view="out" aria-label="Zoom out">−</button>
+        </div>
+        </div>
         <div class="globe-ui">
           <div class="chips layer-toggles" role="group" aria-label="Globe layers" data-track-group="Globe layer">
             <button type="button" data-layer="work" aria-pressed="true"><span class="sw work"></span>My research and network</button>
@@ -276,6 +301,16 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <button type="button" data-layer="live" aria-pressed="false"><span class="sw live"></span>Live NASA events</button>
           </div>
           <button type="button" class="btn ghost tour-start" id="tour-start" hidden data-track="Globe tour" data-track-detail="Start">Take the tour</button>
+        </div>
+        <div class="globe-time" id="globe-time" hidden>
+          <ul class="hz-legend" aria-label="Disaster types">
+            <li><span class="sw" style="background:var(--hz-flood)"></span>Flood</li><li><span class="sw" style="background:var(--hz-landslide)"></span>Landslide or debris flow</li><li><span class="sw" style="background:var(--hz-ice)"></span>Glacial lake or ice</li><li><span class="sw" style="background:var(--hz-subsidence)"></span>Subsidence</li>
+          </ul>
+          <div class="yr">
+            <label for="tl-year">Disasters up to <output id="tl-out" for="tl-year">2025</output></label>
+            <input type="range" id="tl-year" min="2010" max="2025" step="1" value="2025">
+            <button type="button" class="tl-play" id="tl-play" data-track="Globe timeline" data-track-detail="Play">Play 2010 to 2025</button>
+          </div>
         </div>
         <p class="globe-info" id="globe-info" aria-live="polite">Drag to turn the globe. Hover or tap a point for details.</p>
         <div class="tour" id="globe-tour" hidden aria-live="polite">
@@ -808,7 +843,9 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
   var el=document.getElementById('globe'), fb=document.getElementById('globe-fallback'), info=document.getElementById('globe-info');
   function webgl(){try{var c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));}catch(e){return false;}}
   function load(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
-  var data=null, world=null, layers={work:true,events:true,live:false}, live=[], stop=-1;
+  var data=null, world=null, layers={work:true,events:true,live:false}, live=[], stop=-1, upto=2025;
+  var HZ_VAR={flood:'--hz-flood',landslide:'--hz-landslide',ice:'--hz-ice',subsidence:'--hz-subsidence'};
+  function hz(p){return css(HZ_VAR[p.type]||'--silt-fill');}
 
   function listView(ev){
     var h='<ul>';
@@ -836,12 +873,13 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
       data.work.forEach(function(p){pts.push(Object.assign({c:lake,r:.32,alt:.02},p));});
       data.network.forEach(function(p){pts.push(Object.assign({c:ink,r:.3,alt:.015},p));});
     }
-    if(layers.events)data.events.forEach(function(p){pts.push(Object.assign({c:silt,r:.38,alt:.012},p));});
+    var shown=layers.events?data.events.filter(function(p){return p.year<=upto;}):[];
+    shown.forEach(function(p){pts.push(Object.assign({c:hz(p),r:.38,alt:.012},p));});
     if(layers.live)live.forEach(function(p){pts.push(Object.assign({c:'#C2463A',r:.34,alt:.01},p));});
     world.pointsData(pts);
     var rings=[];
     if(layers.work)rings.push({lat:data.home.lat,lng:data.home.lng,c:lake,max:5,speed:1.2,rep:1400});
-    if(layers.events)data.events.forEach(function(p){rings.push({lat:p.lat,lng:p.lng,c:silt,max:2.2,speed:.8,rep:2600+Math.random()*1800});});
+    shown.forEach(function(p){rings.push({lat:p.lat,lng:p.lng,c:hz(p),max:2.2,speed:.8,rep:2600+Math.random()*1800});});
     if(stop>=0){var t=data.tour[stop];rings.push({lat:t.lat,lng:t.lng,c:css('--ink'),max:3.2,speed:1.4,rep:1100});}
     world.ringsData(reduce?[]:rings);
     world.arcsData(layers.work?data.network.map(function(p){return {startLat:data.home.lat,startLng:data.home.lng,endLat:p.lat,endLng:p.lng};}):[]);
@@ -850,9 +888,9 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
 
   function start(){
     if(!webgl()){fb.textContent='Your browser cannot show the 3D globe. The list below has the same information.';
-      fetch('assets/data/events.json?v=2').then(function(r){return r.json();}).then(listView);return;}
+      fetch('assets/data/events.json?v=3').then(function(r){return r.json();}).then(listView);return;}
     Promise.all([load('assets/globe.gl.min.js'),load('assets/topojson-client.min.js')]).then(function(){
-      return Promise.all([fetch('assets/data/countries-110m.json').then(function(r){return r.json();}),fetch('assets/data/events.json?v=2').then(function(r){return r.json();})]);
+      return Promise.all([fetch('assets/data/countries-110m.json').then(function(r){return r.json();}),fetch('assets/data/events.json?v=3').then(function(r){return r.json();})]);
     }).then(function(res){
       var topo=res[0]; data=res[1]; listView(data);
       var countries=topojson.feature(topo,topo.objects.countries).features.filter(function(c){return c.id!=='010';});
@@ -884,11 +922,13 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
       if('IntersectionObserver' in window)new IntersectionObserver(function(es){onScreen=es[es.length-1].isIntersecting;sync();}).observe(el);
       document.addEventListener('visibilitychange',sync);
       if(data.tour&&data.tour.length)document.getElementById('tour-start').hidden=false;
+      document.getElementById('globe-zoom').hidden=false;
+      document.getElementById('globe-time').hidden=!layers.events;
       render();
       new ResizeObserver(function(){world.width(el.clientWidth).height(el.clientHeight);}).observe(el);
       document.addEventListener('themechange',function(){var dk=isDark();world.hexPolygonColor(function(){return css('--contour-major');}).atmosphereColor(css('--lake-fill')).arcColor(function(){return [hexToRgba(css('--lake'),.15),hexToRgba(css('--lake'),.75)];});m.color.set(dk?'#1B2C2B':'#E7EFEC');if(m.emissive){m.emissive.set(css('--snow'));m.emissiveIntensity=dk?.25:.55;}render();});
     }).catch(function(){fb.textContent='The globe could not load. The list below has the same information.';
-      fetch('assets/data/events.json?v=2').then(function(r){return r.json();}).then(listView).catch(function(){});});
+      fetch('assets/data/events.json?v=3').then(function(r){return r.json();}).then(listView).catch(function(){});});
   }
   function liveFetch(){
     return fetch('https://eonet.gsfc.nasa.gov/api/v3/events?status=open&days=30&category=floods,landslides,severeStorms&limit=80')
@@ -903,6 +943,29 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
         return live.length;
       });
   }
+  /* View buttons: no scroll-wheel zoom, so the page always scrolls normally */
+  var VIEWS={himalaya:{lat:31,lng:83,altitude:.85},world:{lat:24,lng:78,altitude:2.05}};
+  document.getElementById('globe-zoom').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b||!world)return;
+    var v=b.dataset.view, pov=world.pointOfView(), ms=reduce?0:700;
+    world.controls().autoRotate=false;
+    if(VIEWS[v])world.pointOfView(VIEWS[v],reduce?0:1200);
+    else world.pointOfView({lat:pov.lat,lng:pov.lng,altitude:Math.max(.35,Math.min(3,pov.altitude*(v==='in'?.65:1.55)))},ms);
+  });
+  /* Timeline: show disasters up to the chosen year; Play steps through the years */
+  var tl=document.getElementById('tl-year'), tlOut=document.getElementById('tl-out'), tlPlay=document.getElementById('tl-play'), tlTimer=null;
+  function setYear(y){upto=+y;tl.value=upto;tlOut.textContent=upto;render();
+    var n=data?data.events.filter(function(p){return p.year<=upto;}).length:0;
+    info.textContent=n+' of '+(data?data.events.length:0)+' selected disasters, 2010 to '+upto+'.';}
+  function stopPlay(){clearInterval(tlTimer);tlTimer=null;tlPlay.textContent='Play 2010 to 2025';}
+  tl.addEventListener('input',function(){stopPlay();setYear(tl.value);});
+  tlPlay.addEventListener('click',function(){
+    if(tlTimer){stopPlay();return;}
+    if(!world)return; world.controls().autoRotate=false;
+    var y=+tl.min; setYear(y); tlPlay.textContent='Pause';
+    tlTimer=setInterval(function(){y++; if(y>+tl.max){stopPlay();return;} setYear(y);},reduce?1200:800);
+  });
+
   /* Guided tour: a fixed sequence of stops with captions and links */
   var tourEl=document.getElementById('globe-tour'), startBtn=document.getElementById('tour-start');
   function go(i){
@@ -941,7 +1004,7 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
       .catch(function(){b.disabled=false;info.textContent='Live events could not load here. They appear on the published website, where the page can reach NASA.';});
       return;
     }
-    layers[k]=on; b.setAttribute('aria-pressed',on); render();
+    layers[k]=on; b.setAttribute('aria-pressed',on); if(k==='events'){document.getElementById('globe-time').hidden=!on;if(!on)stopPlay();} render();
   });});
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){if(es.some(function(e){return e.isIntersecting;})){io.disconnect();start();}},{rootMargin:'200px'});io.observe(el);
