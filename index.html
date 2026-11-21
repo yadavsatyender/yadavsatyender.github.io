@@ -299,7 +299,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
           <div class="chips layer-toggles" role="group" aria-label="Globe layers" data-track-group="Globe layer">
             <button type="button" data-layer="work" aria-pressed="true"><span class="sw work"></span>My research and network</button>
             <button type="button" data-layer="events" aria-pressed="true"><span class="sw event"></span>Major disasters, 2010 to 2025</button>
-            <button type="button" data-layer="glofs" aria-pressed="false"><span class="sw glof"></span>Glacial lake outbursts since 850</button>
+            <button type="button" data-layer="glofs" aria-pressed="false"><span class="sw glof"></span>Recorded glacial lake outbursts (6,263)</button>
             <button type="button" data-layer="live" aria-pressed="false"><span class="sw live"></span>Live NASA events</button>
           </div>
           <button type="button" class="btn ghost tour-start" id="tour-start" hidden data-track="Globe tour" data-track-detail="Start">Take the tour</button>
@@ -954,7 +954,7 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
   }
   function sayGlofs(){
     if(!glofs)return; var ev=glofs.events, n=ev.length, s2000=ev.filter(function(e){return e[2]>=2000;}).length;
-    info.innerHTML='<b>'+n.toLocaleString('en-GB')+' recorded glacial lake outbursts</b>, '+s2000.toLocaleString('en-GB')+' of them since 2000, grouped into hexagons; taller means more events. Data: <a href="https://doi.org/10.5281/zenodo.7330344">Glacial Lake Outburst Flood Database v4.2</a> (Lützow, Veh and Korup), CC BY 4.0, simplified to location and year.';
+    info.innerHTML='<b>'+n.toLocaleString('en-GB')+' recorded glacial lake outbursts</b>, from 850 to 2026; '+s2000.toLocaleString('en-GB')+' of them since 2000, when satellites made outbursts far easier to record. Grouped into hexagons; taller means more events. Data: <a href="https://doi.org/10.5281/zenodo.7330344">Glacial Lake Outburst Flood Database v4.2</a> (Lützow, Veh and Korup), CC BY 4.0, simplified to location and year.';
   }
   /* View buttons: no scroll-wheel zoom, so the page always scrolls normally */
   var VIEWS={himalaya:{lat:31,lng:83,altitude:.85},world:{lat:24,lng:78,altitude:2.05}};
