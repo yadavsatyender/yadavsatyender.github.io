@@ -11,7 +11,7 @@
   --measure:68ch; --gutter:clamp(20px,4vw,56px); --maxw:1240px;
 }
 @media (prefers-color-scheme:dark){
-  :root{
+  :root:not([data-theme="light"]){
     --snow:#132020; --paper:#182727; --ink:#E6EEEC; --scree:#9DAEAA;
     --lake:#6FC2BC; --lake-fill:#2F7F7A; --lake-soft:#1D3836;
     --silt:#D2A866; --silt-fill:#C1924F; --silt-soft:#33291B;
@@ -19,6 +19,19 @@
     --r1:#22302D; --r2:#5A5236; --r3:#9C7843; --r4:#C98A4C; --r5:#F0B27A;
   }
 }
+:root[data-theme="dark"]{
+    --snow:#132020; --paper:#182727; --ink:#E6EEEC; --scree:#9DAEAA;
+    --lake:#6FC2BC; --lake-fill:#2F7F7A; --lake-soft:#1D3836;
+    --silt:#D2A866; --silt-fill:#C1924F; --silt-soft:#33291B;
+    --contour:#2A3B3A; --contour-major:#3E5654; --rule:#263735;
+    --r1:#22302D; --r2:#5A5236; --r3:#9C7843; --r4:#C98A4C; --r5:#F0B27A;
+  }
+:root{color-scheme:light}
+:root[data-theme="dark"]{color-scheme:dark}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
+/* Light/dark switch: soft fade only while switching, never for reduced motion */
+html.theme-fade,html.theme-fade *,html.theme-fade *::before,html.theme-fade *::after{transition:background-color .3s ease,color .3s ease,border-color .3s ease,fill .3s ease,stroke .3s ease!important}
+@media (prefers-reduced-motion:reduce){html.theme-fade,html.theme-fade *{transition:none!important}}
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
@@ -39,6 +52,14 @@ a:hover{text-decoration-thickness:2px}
 .top nav a{color:var(--scree);text-decoration:none}
 .top nav a:hover,.top nav a[aria-current="page"]{color:var(--ink)}
 .top nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--lake);text-decoration-thickness:2px;text-underline-offset:.5em}
+.top nav li.theme-item{display:flex;align-items:center}
+.theme-toggle{display:none;place-items:center;width:34px;height:34px;margin:-8px -6px -8px 0;padding:0;border:0;border-radius:50%;background:none;color:var(--scree);cursor:pointer}
+:root[data-theme] .theme-toggle{display:inline-grid}
+.theme-toggle:hover{color:var(--ink);background:var(--rule)}
+.theme-toggle svg{width:18px;height:18px;display:block}
+.theme-toggle .i-sun{display:none}
+:root[data-theme="dark"] .theme-toggle .i-sun{display:block}
+:root[data-theme="dark"] .theme-toggle .i-moon{display:none}
 
 /* Type */
 h1,h2,h3{font-family:var(--sans);color:var(--ink)}
