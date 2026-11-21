@@ -198,7 +198,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
   </header>
 
   <main id="main">
-    <div class="hero">
+    <div class="hero" data-track-section="Intro">
       <div>
         <h1><span>Satyender</span><span>Yadav</span></h1>
         <p class="role">Multi-hazard risk researcher. Volunteer, Disaster Risk Reduction Unit, UNESCO.<br>M.Tech, Soil and Water Conservation Engineering, GBPUAT.</p>
@@ -217,29 +217,29 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
       <div class="globe-wrap">
         <div id="globe" role="img" aria-label="Interactive globe of Satyender Yadav's study regions, collaborations and major mountain hazard disasters. A text list follows below."><div class="globe-fallback" id="globe-fallback">Loading the globe</div></div>
         <div class="globe-ui">
-          <div class="chips layer-toggles" role="group" aria-label="Globe layers">
+          <div class="chips layer-toggles" role="group" aria-label="Globe layers" data-track-group="Globe layer">
             <button type="button" data-layer="work" aria-pressed="true"><span class="sw work"></span>My research and network</button>
             <button type="button" data-layer="events" aria-pressed="true"><span class="sw event"></span>Major disasters, 2010 to 2025</button>
             <button type="button" data-layer="live" aria-pressed="false"><span class="sw live"></span>Live NASA events</button>
           </div>
         </div>
         <p class="globe-info" id="globe-info" aria-live="polite">Drag to turn the globe. Hover or tap a point for details.</p>
-        <details class="globe-list"><summary>View the globe as a list</summary><div id="globe-list"></div></details>
+        <details class="globe-list"><summary data-track="Globe as list">View the globe as a list</summary><div id="globe-list"></div></details>
       </div>
     </div>
 
-    <div class="now">
+    <div class="now" data-track-section="News: WLF7 talk">
       <time datetime="2026-11-24">24 Nov 2026</time>
       <p>I present an AI research assistant for landslide science at the 7th World Landslide Forum, Faridabad (Session 1.1, paper A676). <a href="blog.html#wlf7-ai-research-assistant">Read the story</a></p>
     </div>
 
     <!-- RESEARCH -->
-    <section id="research" aria-labelledby="research-h">
+    <section id="research" data-track-section="Research" aria-labelledby="research-h">
       <div class="sec-head">
         <h2 id="research-h">Research</h2>
         <p>Disaster risk is not just the hazard. Following the IPCC framework, my work moves through each term of the risk equation, and then asks what it takes for people to act on the result.</p>
       </div>
-      <div class="equation" role="tablist" aria-label="Risk equation">
+      <div class="equation" role="tablist" aria-label="Risk equation" data-track-group="Research equation">
         <button class="term" role="tab" id="t-h" aria-controls="p-h" aria-selected="true">Hazard</button><span class="op" aria-hidden="true">×</span>
         <button class="term" role="tab" id="t-e" aria-controls="p-e" aria-selected="false" tabindex="-1">Exposure</button><span class="op" aria-hidden="true">×</span>
         <button class="term" role="tab" id="t-v" aria-controls="p-v" aria-selected="false" tabindex="-1">Vulnerability</button><span class="op" aria-hidden="true">=</span>
@@ -306,7 +306,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- MAP UNIT EXPLAINER -->
-    <section id="map-unit" aria-labelledby="mu-h">
+    <section id="map-unit" data-track-section="Map-unit explainer" aria-labelledby="mu-h">
       <div class="sec-head">
         <h2 id="mu-h">Why the map unit matters</h2>
         <p>Hazard maps for planning are usually reported by administrative unit. Averaging inside large units can hide small, very dangerous slopes. Try it below, on a synthetic landscape.</p>
@@ -322,7 +322,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
           <div class="mu-controls">
             <fieldset>
               <legend>Map unit</legend>
-              <div class="chips" data-group="unit">
+              <div class="chips" data-group="unit" data-track-group="Map-unit explainer: unit">
                 <button type="button" data-v="pixel" aria-pressed="false">30 m pixels</button>
                 <button type="button" data-v="small" aria-pressed="false">Small units</button>
                 <button type="button" data-v="large" aria-pressed="true">Subdistricts</button>
@@ -330,7 +330,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             </fieldset>
             <fieldset>
               <legend>Summary statistic per unit</legend>
-              <div class="chips" data-group="stat">
+              <div class="chips" data-group="stat" data-track-group="Map-unit explainer: statistic">
                 <button type="button" data-v="mean" aria-pressed="true">Mean</button>
                 <button type="button" data-v="p90" aria-pressed="false">90th percentile</button>
               </div>
@@ -348,7 +348,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- AI ASSISTANT -->
-    <section id="assistant" aria-labelledby="as-h">
+    <section id="assistant" data-track-section="AI research assistant" aria-labelledby="as-h">
       <div class="assist">
         <div>
           <h2 id="as-h" style="margin-bottom:20px">An AI research assistant for landslide science</h2>
@@ -368,12 +368,12 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- PUBLICATIONS -->
-    <section id="publications" aria-labelledby="pub-h">
+    <section id="publications" data-track-section="Publications" aria-labelledby="pub-h">
       <div class="sec-head">
         <h2 id="pub-h">Publications and talks</h2>
         <p>Current list also on <a href="https://scholar.google.com/citations?user=y6TnqXcAAAAJ">Google Scholar</a> and <a href="https://orcid.org/0009-0008-9498-3699">ORCID</a>.</p>
       </div>
-      <div class="chips" role="group" aria-label="Filter" id="pub-filter" style="margin-bottom:22px">
+      <div class="chips" role="group" aria-label="Filter" id="pub-filter" style="margin-bottom:22px" data-track-group="Publications filter">
         <button type="button" data-f="all" aria-pressed="true">All</button>
         <button type="button" data-f="paper" aria-pressed="false">Papers and preprints</button>
         <button type="button" data-f="talk" aria-pressed="false">Talks and posters</button>
@@ -386,7 +386,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <p class="t"><a href="https://doi.org/10.1007/s41748-026-01263-8">Integrated multi-criteria decision-making analysis for sub-district scale landslide susceptibility zonation in the Garhwal Himalaya</a><span class="state pub-ok">Published</span></p>
             <p class="au"><b>Yadav, S.</b>, Kumar, P., and Islam, M. S.</p>
             <p class="venue">Earth Systems and Environment</p>
-            <div class="acts"><a href="https://doi.org/10.1007/s41748-026-01263-8">DOI</a><button type="button" data-bib="@article{yadav2026garhwal,&#10;  title={Integrated Multi-Criteria Decision-Making Analysis for Sub-District Scale Landslide Susceptibility Zonation in the Garhwal Himalaya},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Islam, M. S.},&#10;  journal={Earth Systems and Environment},&#10;  year={2026},&#10;  doi={10.1007/s41748-026-01263-8}&#10;}">Copy BibTeX</button></div>
+            <div class="acts"><a href="https://doi.org/10.1007/s41748-026-01263-8">DOI</a><button type="button" data-track="Copy BibTeX" data-track-detail="Garhwal 2026 (ESE)" data-bib="@article{yadav2026garhwal,&#10;  title={Integrated Multi-Criteria Decision-Making Analysis for Sub-District Scale Landslide Susceptibility Zonation in the Garhwal Himalaya},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Islam, M. S.},&#10;  journal={Earth Systems and Environment},&#10;  year={2026},&#10;  doi={10.1007/s41748-026-01263-8}&#10;}">Copy BibTeX</button></div>
           </div>
         </li>
         <li class="pub" data-k="paper">
@@ -395,7 +395,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
             <p class="t"><a href="https://www.preprints.org/manuscript/202606.2088">Landslide susceptibility zonation and aggregation-scale sensitivity across sub-districts of the Kumaon Himalaya: a comparative analysis using AHP and Fuzzy-AHP framework</a><span class="state wip">Preprint</span></p>
             <p class="au"><b>Yadav, S.</b>, Kumar, P., Vishwakarma, D. K., Al-Mutiry, M., and Abdo, H. G.</p>
             <p class="venue">Preprints.org, not yet peer reviewed</p>
-            <div class="acts"><a href="https://doi.org/10.20944/preprints202606.2088.v1">DOI</a><a href="https://www.preprints.org/manuscript/202606.2088">Read the preprint</a><button type="button" data-bib="@article{yadav2026kumaon,&#10;  title={Landslide Susceptibility Zonation and Aggregation-Scale Sensitivity Across Sub-Districts of the Kumaon Himalaya: A Comparative Analysis Using AHP and Fuzzy-AHP Framework},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Vishwakarma, Dinesh Kumar and Al-Mutiry, Motrih and Abdo, Hazem Ghassan},&#10;  journal={Preprints},&#10;  year={2026},&#10;  doi={10.20944/preprints202606.2088.v1}&#10;}">Copy BibTeX</button></div>
+            <div class="acts"><a href="https://doi.org/10.20944/preprints202606.2088.v1">DOI</a><a href="https://www.preprints.org/manuscript/202606.2088">Read the preprint</a><button type="button" data-track="Copy BibTeX" data-track-detail="Kumaon 2026 (preprint)" data-bib="@article{yadav2026kumaon,&#10;  title={Landslide Susceptibility Zonation and Aggregation-Scale Sensitivity Across Sub-Districts of the Kumaon Himalaya: A Comparative Analysis Using AHP and Fuzzy-AHP Framework},&#10;  author={Yadav, Satyender and Kumar, Pankaj and Vishwakarma, Dinesh Kumar and Al-Mutiry, Motrih and Abdo, Hazem Ghassan},&#10;  journal={Preprints},&#10;  year={2026},&#10;  doi={10.20944/preprints202606.2088.v1}&#10;}">Copy BibTeX</button></div>
           </div>
         </li>
         <li class="pub" data-k="paper">
@@ -460,7 +460,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- ABOUT -->
-    <section id="about" aria-labelledby="about-h">
+    <section id="about" data-track-section="About" aria-labelledby="about-h">
       <div class="sec-head">
         <h2 id="about-h">About</h2>
         <p>I trained as an agricultural and soil and water conservation engineer, and came to hazards through watersheds: the same slopes and rivers that feed farms also fail and flood. I now work at the point where geospatial science meets disaster risk policy.</p>
@@ -490,7 +490,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- BLOG TEASER -->
-    <section id="writing" aria-labelledby="w-h">
+    <section id="writing" data-track-section="Field notes" aria-labelledby="w-h">
       <div class="sec-head">
         <h2 id="w-h">Field notes</h2>
         <p>A weekly story from research and practice: what worked, what failed, and what I learned. <a href="blog.html">All posts</a></p>
@@ -499,7 +499,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- HUB TEASER -->
-    <section id="hub" aria-labelledby="hub-h">
+    <section id="hub" data-track-section="Hazard Hub teaser" aria-labelledby="hub-h">
       <div class="hubteaser">
         <div>
           <h2 id="hub-h" style="margin-bottom:18px">Hazard Hub</h2>
@@ -515,7 +515,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" aria-labelledby="contact-h">
+    <section id="contact" data-track-section="Contact" aria-labelledby="contact-h">
       <div class="contact">
         <h2 id="contact-h">Contact</h2>
         <div>
@@ -532,7 +532,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
 
   <footer class="site">
     <span>© 2026 Satyender Yadav</span>
-    <span>Globe: Natural Earth via world-atlas, globe.gl. Live events: NASA EONET. Last updated November 2026</span>
+    <span><a href="privacy.html">Privacy and visitor statistics</a>. Globe: Natural Earth, globe.gl. Live events: NASA EONET. Updated November 2026</span>
   </footer>
 </div>
 
@@ -734,7 +734,7 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
         .hexPolygonsData(countries).hexPolygonResolution(3).hexPolygonMargin(.42).hexPolygonUseDots(true)
         .hexPolygonColor(function(){return css('--contour-major');})
         .pointLat('lat').pointLng('lng').pointColor('c').pointRadius('r').pointAltitude('alt').pointResolution(16)
-        .pointLabel(tip).onPointHover(function(d){el.style.cursor=d?'pointer':'grab';if(d)say(d);}).onPointClick(say)
+        .pointLabel(tip).onPointHover(function(d){el.style.cursor=d?'pointer':'grab';if(d)say(d);}).onPointClick(function(d){say(d);if(window.siteTrack)siteTrack('action','Globe point',d.live?'Live NASA event':d.name);})
         .ringColor(function(d){return function(t){return hexToRgba(d.c,1-t);};}).ringMaxRadius('max').ringPropagationSpeed('speed').ringRepeatPeriod('rep')
         .arcColor(function(){return [hexToRgba(css('--lake'),.15),hexToRgba(css('--lake'),.75)];})
         .arcStroke(.35).arcAltitudeAutoScale(.35)
@@ -778,5 +778,6 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
 })();
 })();
 </script>
+<script src="assets/analytics.js" defer></script>
 </body>
 </html>

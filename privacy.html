@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy and visitor statistics | Satyender Yadav</title>
+<meta name="description" content="How this website counts visits without cookies or personal data, and how to opt out.">
+<meta name="theme-color" content="#F2F5F4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%230F6F6B'/%3E%3Cpath d='M5 20c5-6 9 2 13-4s6-3 9-2' stroke='%23F2F5F4' stroke-width='2.4' fill='none'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400..650;1,8..60,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+article{max-width:720px;margin:0 auto;padding:clamp(16px,4vw,48px) 0 clamp(56px,8vw,96px)}
+article h1{font-weight:720;font-stretch:112%;font-size:clamp(2rem,4.4vw,3rem);line-height:1.05;letter-spacing:-.02em;margin:.2em 0 .6em}
+article h2{font-size:1.35rem;margin:1.8em 0 .5em}
+article p,article li{font-size:1.08rem;line-height:1.7;max-width:var(--measure)}
+article ul{padding-left:1.2em}
+.optbox{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:20px 22px;margin:28px 0}
+.optbox p{margin:0 0 14px;font-family:var(--sans);font-size:1rem}
+.optbox .state{font-weight:600}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="top">
+    <a class="mark" href="index.html">Satyender Yadav</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html#research">Research</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="hub.html">Hazard Hub</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <article>
+      <h1>Privacy and visitor statistics</h1>
+      <p>This site counts visits so I can see which research, datasets and stories are useful. The counting is anonymous, uses no cookies, and stores nothing on your device.</p>
+
+      <div class="optbox" id="optbox">
+        <p>Visitor statistics on this browser: <span class="state" id="optstate">on</span></p>
+        <button class="btn" type="button" id="optbtn">Turn off statistics for this browser</button>
+      </div>
+
+      <h2>What is recorded</h2>
+      <ul>
+        <li>The page you open, how long you actively read it and how far you scroll.</li>
+        <li>Which sections come into view, which buttons and filters you use, and which links or files you open.</li>
+        <li>The website you came from (its name only, not the full address), and campaign tags if the link had them, such as the QR code on a conference slide.</li>
+        <li>Your country, device type, browser, screen size class and browser language.</li>
+        <li>Page speed measurements and technical errors, so I can fix problems.</li>
+      </ul>
+
+      <h2>What is not recorded</h2>
+      <ul>
+        <li>No cookies, and nothing stored in your browser. The only exception is the switch above: if you turn statistics off, your browser remembers that choice.</li>
+        <li>No IP address. Your address is shortened (the last part removed) and used only to form a code that changes every day and cannot be traced back to you or linked from one day to the next.</li>
+        <li>No city or precise location, and no text you type, including searches in Hazard Hub.</li>
+        <li>No advertising, profiling or tracking across other websites. Nothing is shared or sold.</li>
+      </ul>
+
+      <h2>Do Not Track and Global Privacy Control</h2>
+      <p>If your browser sends either signal, your visit is still counted but without the daily code. To stop all counting, use the switch above.</p>
+
+      <h2>Where the data is kept, and for how long</h2>
+      <p>The statistics are processed on Cloudflare servers used only for this site and are deleted automatically after 13 months. I am the only person who can see them.</p>
+
+      <h2>Questions</h2>
+      <p>Write to <a href="mailto:satyenderyadav17@gmail.com">satyenderyadav17@gmail.com</a>.</p>
+      <p class="muted">Last updated 20 November 2026.</p>
+    </article>
+  </main>
+  <footer class="site">
+    <span>© 2026 Satyender Yadav</span>
+    <span><a href="index.html">Back to the home page</a></span>
+  </footer>
+</div>
+<script src="assets/analytics.js"></script>
+<script>
+(function(){
+  var st=document.getElementById('optstate'), bt=document.getElementById('optbtn');
+  function show(){
+    var off=window.siteAnalytics&&siteAnalytics.isOptedOut();
+    st.textContent=off?'off':'on';
+    bt.textContent=off?'Turn statistics back on':'Turn off statistics for this browser';
+  }
+  bt.addEventListener('click',function(){
+    if(!window.siteAnalytics)return;
+    if(siteAnalytics.isOptedOut())siteAnalytics.optIn();else siteAnalytics.optOut();
+    show();
+  });
+  show();
+})();
+</script>
+</body>
+</html>

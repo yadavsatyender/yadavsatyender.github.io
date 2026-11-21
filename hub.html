@@ -125,7 +125,7 @@
     </div>
 
     <!-- LIVE WATCH -->
-    <section id="live" aria-labelledby="live-h" style="border-top:0;padding-top:clamp(8px,2vw,24px)">
+    <section id="live" data-track-section="Live watch" aria-labelledby="live-h" style="border-top:0;padding-top:clamp(8px,2vw,24px)">
       <div class="sec-head">
         <h2 id="live-h">Live watch</h2>
         <p>Two views that update every time the page opens: the rainfall and river outlook for my study region in the Uttarakhand Himalaya, and open flood, landslide, storm and earthquake events worldwide.</p>
@@ -153,7 +153,7 @@
     </section>
 
     <!-- CATALOGUE -->
-    <section id="catalogue" aria-labelledby="cat-h">
+    <section id="catalogue" data-track-section="Catalogue" aria-labelledby="cat-h">
       <div class="sec-head"><h2 id="cat-h">Dataset catalogue</h2><p>Search or filter by hazard and by how you want to access the data. Earth Engine datasets come with code you can paste straight into the Code Editor.</p></div>
       <label class="search" for="q">
         <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -162,7 +162,7 @@
       </label>
       <div class="filters">
         <div class="row"><span class="lab" id="lab-hz">Hazard</span>
-          <div class="chips" role="group" aria-labelledby="lab-hz" data-filter="hazard">
+          <div class="chips" role="group" aria-labelledby="lab-hz" data-filter="hazard" data-track-group="Hub hazard filter">
             <button type="button" data-v="" aria-pressed="true">All</button>
             <button type="button" data-v="flood" aria-pressed="false">Floods</button>
             <button type="button" data-v="landslide" aria-pressed="false">Landslides</button>
@@ -172,7 +172,7 @@
           </div>
         </div>
         <div class="row"><span class="lab" id="lab-ac">Access</span>
-          <div class="chips" role="group" aria-labelledby="lab-ac" data-filter="access">
+          <div class="chips" role="group" aria-labelledby="lab-ac" data-filter="access" data-track-group="Hub access filter">
             <button type="button" data-v="" aria-pressed="true">Any</button>
             <button type="button" data-v="gee" aria-pressed="false">Google Earth Engine</button>
             <button type="button" data-v="api" aria-pressed="false">API</button>
@@ -185,7 +185,7 @@
     </section>
 
     <!-- ROADMAP -->
-    <section id="roadmap" aria-labelledby="road-h">
+    <section id="roadmap" data-track-section="Roadmap" aria-labelledby="road-h">
       <div class="sec-head">
         <h2 id="road-h">How the Hub grows</h2>
         <p>The aim is one place where anyone working on hydroclimatic extremes and multi-hazard risk can find the data, the code and the evidence. It grows in stages, and you can help.</p>
@@ -205,7 +205,7 @@
   </main>
 
   <footer class="site">
-    <span>© 2026 Satyender Yadav. Catalogue CC BY 4.0. Dataset licences belong to their providers.</span>
+    <span>© 2026 Satyender Yadav. Catalogue CC BY 4.0. Dataset licences belong to their providers. <a href="privacy.html">Privacy</a></span>
     <span>Live data: <a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>, GloFAS (Copernicus EMS), NASA EONET, USGS</span>
   </footer>
 </div>
@@ -237,6 +237,7 @@ function render(){
     var hay=(d.name+' '+d.provider+' '+d.desc+' '+d.group+' '+d.coverage+' '+d.hazards.map(function(h){return HZ[h];}).join(' ')).toLowerCase();
     return toks.every(function(t){return hay.indexOf(t)>=0;});
   });
+  lastCount=list.length;
   document.getElementById('resultline').textContent=list.length===DS.length?'Showing all '+DS.length+' datasets':'Showing '+list.length+' of '+DS.length+' datasets';
   var out='';
   order.forEach(function(g){
@@ -247,7 +248,7 @@ function render(){
       out+='<article class="ds"><div><p class="nm"><a href="'+esc(d.url)+'">'+esc(d.name)+'</a></p><p class="pv">'+esc(d.provider)+'</p><p class="de">'+esc(d.desc)+'</p>'
         +'<div class="tags">'+d.hazards.map(function(h){return '<span class="tag '+h+'">'+HZ[h]+'</span>';}).join('')+d.access.map(function(a){return '<span class="tag">'+AC[a]+'</span>';}).join('')+'</div></div>'
         +'<dl class="meta"><dt>Coverage</dt><dd>'+esc(d.coverage)+'</dd><dt>Resolution</dt><dd>'+esc(d.resolution)+'</dd><dt>Period</dt><dd>'+esc(d.period)+'</dd>'+(d.gee?'<dt>Earth Engine</dt><dd><code style="font-size:.82rem;word-break:break-all">'+esc(d.gee)+'</code></dd>':'')+'</dl>'
-        +'<div class="acts"><a href="'+esc(d.url)+'">Open dataset</a>'+(d.gee?'<button type="button" data-snip="'+i+'">Copy Earth Engine code</button>':'')+(d.paper&&d.paper!==d.url?'<a href="'+esc(d.paper)+'">Paper</a>':'')+'</div></article>';
+        +'<div class="acts"><a href="'+esc(d.url)+'">Open dataset</a>'+(d.gee?'<button type="button" data-snip="'+i+'" data-track="Copy Earth Engine code" data-track-detail="'+esc(d.name)+'">Copy Earth Engine code</button>':'')+(d.paper&&d.paper!==d.url?'<a href="'+esc(d.paper)+'">Paper</a>':'')+'</div></article>';
     });
     out+='</div>';
   });
@@ -259,7 +260,12 @@ document.getElementById('results').addEventListener('click',function(e){
   try{navigator.clipboard.writeText(snippet(d)).then(function(){toast('Earth Engine code for '+d.name+' copied.');},function(){toast('Copy was blocked. The collection ID is shown next to the dataset.');});}
   catch(err){toast('Copy was blocked. The collection ID is shown next to the dataset.');}
 });
-document.getElementById('q').addEventListener('input',function(e){f.q=e.target.value;render();});
+var sTimer=null,lastCount=0;
+document.getElementById('q').addEventListener('input',function(e){
+  f.q=e.target.value;render();clearTimeout(sTimer);
+  if(!f.q.trim())return;
+  sTimer=setTimeout(function(){var n=lastCount;if(window.siteTrack)siteTrack('search','Hazard Hub',n===0?'0':n<=5?'1-5':n<=20?'6-20':'21+',n);},1500);
+});
 document.querySelectorAll('[data-filter]').forEach(function(g){
   var bs=[].slice.call(g.querySelectorAll('button'));
   bs.forEach(function(b){b.addEventListener('click',function(){bs.forEach(function(x){x.setAttribute('aria-pressed',x===b);});f[g.dataset.filter]=b.dataset.v;render();});});
@@ -307,8 +313,10 @@ function line(vals){
       h+='<tr><td class="place"><b>'+esc(s.n)+'</b><i>'+esc(s.r)+'</i></td><td>'+bars(r,Math.max(maxR,10))+'</td><td class="num">'+tot.toFixed(0)+' mm</td>'
         +'<td class="hide-s">'+(q.length>1?line(q):'<span class="muted">No data</span>')+'</td><td class="num hide-s">'+(q.length?Math.round(q[0])+' m³/s':'')+'</td></tr>';
     });
+    if(window.siteTrack)siteTrack('action','Live feed','Forecast loaded');
     el.innerHTML=h+'</tbody></table><p class="muted sans" style="font-size:.82rem;margin-top:10px">Bars share one scale across places. Updated '+new Date().toLocaleString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+'.</p>';
   }).catch(function(){
+    if(window.siteTrack)siteTrack('action','Live feed','Forecast unavailable');
     el.innerHTML='<p class="state-msg">Live forecasts appear when this page runs on the public website. This preview cannot reach outside data services.</p>';
   });
 })();
@@ -335,9 +343,11 @@ function line(vals){
     qs.forEach(function(q){var p=P(q.lat,q.lng);s+=dot(p[0],p[1],COL.eq,Math.max(2.5,(q.mag-4)*2.4),q.label+', '+q.t);});
     evs.forEach(function(e){var p=P(e.lat,e.lng);s+=dot(p[0],p[1],COL[e.cat]||css('--scree'),5,e.label+': '+e.t);});
     g.innerHTML=s;
+    if(window.siteTrack)siteTrack('action','Live feed','Events loaded');
     var recent=evs.concat(qs.filter(function(q){return q.mag>=6;})).sort(function(a,b){return (b.date||'').localeCompare(a.date||'');}).slice(0,8);
     list.innerHTML=recent.map(function(e){return '<li><span>'+esc(e.cat==='eq'?e.label+', '+e.t:e.t)+'</span><span>'+(e.date?new Date(e.date).toLocaleDateString('en-GB',{day:'numeric',month:'short'}):'')+'</span></li>';}).join('');
   }).catch(function(){
+    if(window.siteTrack)siteTrack('action','Live feed','Events unavailable');
     msg.innerHTML='<p class="state-msg">Live events appear when this page runs on the public website. Below: selected past disasters from my research reading.</p>';
     fetch('assets/data/events.json').then(function(r){return r.json();}).then(function(d){
       g.innerHTML=d.events.map(function(e){var p=P(e.lat,e.lng);return dot(p[0],p[1],css('--silt-fill'),5,e.name+', '+e.year);}).join('');
@@ -347,5 +357,6 @@ function line(vals){
 })();
 })();
 </script>
+<script src="assets/analytics.js" defer></script>
 </body>
 </html>

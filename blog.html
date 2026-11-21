@@ -68,14 +68,14 @@ article.post h1{font-weight:720;font-stretch:112%;font-size:clamp(2rem,4.4vw,3.2
         <h1>Field notes</h1>
         <p>A story every week from research and practice on mountain hazards, disaster risk and AI: what worked, what failed, and what I learned.</p>
       </div>
-      <div class="chips tagbar" id="tagbar" role="group" aria-label="Filter by topic"></div>
-      <ol class="plist" id="plist"><li><span></span><p>Loading posts</p></li></ol>
+      <div class="chips tagbar" id="tagbar" role="group" aria-label="Filter by topic" data-track-group="Blog topic"></div>
+      <ol class="plist" id="plist" data-track-section="Post list"><li><span></span><p>Loading posts</p></li></ol>
     </div>
     <article class="post" id="post-view" hidden aria-live="polite"></article>
   </main>
 
   <footer class="site">
-    <span>© 2026 Satyender Yadav. Posts CC BY 4.0 unless stated.</span>
+    <span>© 2026 Satyender Yadav. Posts CC BY 4.0 unless stated. <a href="privacy.html">Privacy</a></span>
     <span>New post every week. Follow on <a href="https://www.linkedin.com/in/satyenderyadav17">LinkedIn</a></span>
   </footer>
 </div>
@@ -111,7 +111,7 @@ function showPost(slug){
     document.title=p.title+' | Satyender Yadav';
     postV.innerHTML='<a class="back" href="#">All posts</a><h1>'+esc(p.title)+(p.draft?'<span class="draft">Draft</span>':'')+'</h1>'
       +'<div class="pmeta"><time datetime="'+esc(p.date)+'">'+fmt(p.date)+'</time><span>'+mins+' min read</span><span>'+p.tags.map(esc).join(', ')+'</span></div>'
-      +'<div class="prose">'+html+'</div>'
+      +'<div class="prose" data-track-read="'+esc(p.slug)+'" data-track-section="Post text">'+html+'</div>'
       +'<div class="share"><span class="muted">Share this story</span><a href="https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href)+'">LinkedIn</a><a href="https://bsky.app/intent/compose?text='+encodeURIComponent(p.title+' '+location.href)+'">Bluesky</a><a href="index.html#contact">Reply by email</a></div>';
     window.scrollTo(0,0);
   }).catch(function(){postV.innerHTML='<a class="back" href="#">All posts</a><p>This post could not load. Refresh to try again.</p>';});
@@ -124,5 +124,6 @@ fetch('posts/index.json').then(function(r){return r.json();}).then(function(list
 window.addEventListener('hashchange',route);
 })();
 </script>
+<script src="assets/analytics.js" defer></script>
 </body>
 </html>
