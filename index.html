@@ -63,6 +63,7 @@
 .sw.work{background:var(--lake)}
 .sw.event{background:linear-gradient(90deg,var(--hz-flood) 0 33%,var(--hz-landslide) 33% 66%,var(--hz-ice) 66%)}
 .sw.live{background:#C2463A}
+.sw.glof{background:var(--hz-ice);border-radius:2px;transform:rotate(30deg)}
 .globe-info{font-family:var(--sans);font-size:.875rem;color:var(--scree);min-height:2.6em;margin:10px 0 0;max-width:60ch}
 .globe-info b{color:var(--ink);font-weight:600}
 .globe-info a{margin-left:.35em;white-space:nowrap}
@@ -298,6 +299,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
           <div class="chips layer-toggles" role="group" aria-label="Globe layers" data-track-group="Globe layer">
             <button type="button" data-layer="work" aria-pressed="true"><span class="sw work"></span>My research and network</button>
             <button type="button" data-layer="events" aria-pressed="true"><span class="sw event"></span>Major disasters, 2010 to 2025</button>
+            <button type="button" data-layer="glofs" aria-pressed="false"><span class="sw glof"></span>Glacial lake outbursts since 850</button>
             <button type="button" data-layer="live" aria-pressed="false"><span class="sw live"></span>Live NASA events</button>
           </div>
           <button type="button" class="btn ghost tour-start" id="tour-start" hidden data-track="Globe tour" data-track-detail="Start">Take the tour</button>
@@ -687,7 +689,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
 
   <footer class="site">
     <span>© 2026 Satyender Yadav</span>
-    <span><a href="privacy.html">Privacy and visitor statistics</a>. Globe: Natural Earth, globe.gl. Live events: NASA EONET. Updated November 2026</span>
+    <span><a href="privacy.html">Privacy and visitor statistics</a>. Globe: Natural Earth, globe.gl. Live events: NASA EONET. Glacial lake outbursts: Lützow, Veh and Korup, GLOF Database v4.2, CC BY 4.0. Updated November 2026</span>
   </footer>
 </div>
 
@@ -843,7 +845,7 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
   var el=document.getElementById('globe'), fb=document.getElementById('globe-fallback'), info=document.getElementById('globe-info');
   function webgl(){try{var c=document.createElement('canvas');return !!(window.WebGLRenderingContext&&(c.getContext('webgl')||c.getContext('experimental-webgl')));}catch(e){return false;}}
   function load(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
-  var data=null, world=null, layers={work:true,events:true,live:false}, live=[], stop=-1, upto=2025;
+  var data=null, world=null, layers={work:true,events:true,live:false,glofs:false}, live=[], glofs=null, stop=-1, upto=2025;
   var HZ_VAR={flood:'--hz-flood',landslide:'--hz-landslide',ice:'--hz-ice',subsidence:'--hz-subsidence'};
   function hz(p){return css(HZ_VAR[p.type]||'--silt-fill');}
 
@@ -882,6 +884,7 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
     shown.forEach(function(p){rings.push({lat:p.lat,lng:p.lng,c:hz(p),max:2.2,speed:.8,rep:2600+Math.random()*1800});});
     if(stop>=0){var t=data.tour[stop];rings.push({lat:t.lat,lng:t.lng,c:css('--ink'),max:3.2,speed:1.4,rep:1100});}
     world.ringsData(reduce?[]:rings);
+    world.hexBinPointsData(layers.glofs&&glofs?glofs.events:[]);
     world.arcsData(layers.work?data.network.map(function(p){return {startLat:data.home.lat,startLng:data.home.lng,endLat:p.lat,endLng:p.lng};}):[]);
   }
   function hexToRgba(h,a){h=h.replace('#','');if(h.length===3)h=h.split('').map(function(c){return c+c;}).join('');var n=parseInt(h,16);return 'rgba('+(n>>16&255)+','+(n>>8&255)+','+(n&255)+','+a+')';}
@@ -910,6 +913,12 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
         .arcColor(function(){return [hexToRgba(css('--lake'),.15),hexToRgba(css('--lake'),.75)];})
         .arcStroke(.35).arcAltitudeAutoScale(.35)
         .arcDashLength(.5).arcDashGap(.2).arcDashAnimateTime(reduce?0:4200);
+      world.hexBinPointLat(function(d){return d[0];}).hexBinPointLng(function(d){return d[1];})
+        .hexBinResolution(3).hexMargin(.18).hexTransitionDuration(reduce?0:600)
+        .hexAltitude(function(h){return .006+.022*Math.log10(1+h.points.length);})
+        .hexTopColor(function(){return hexToRgba(css('--hz-ice'),.85);}).hexSideColor(function(){return hexToRgba(css('--hz-ice'),.45);})
+        .hexLabel(function(h){var ys=h.points.map(function(p){return p[2];}).filter(Boolean);var a=Math.min.apply(null,ys),b=Math.max.apply(null,ys);
+          return '<div class="g-tip"><b>'+h.points.length+' recorded outburst'+(h.points.length>1?'s':'')+'</b><span>'+(ys.length?(a===b?a:a+' to '+b):'Year unknown')+'</span></div>';});
       var m=world.globeMaterial(); m.color.set(dark?'#1B2C2B':'#E7EFEC'); if(m.emissive){m.emissive.set(css('--snow'));m.emissiveIntensity=dark?.25:.55;} m.shininess=4;
       var c=world.controls(); c.enableZoom=false; c.autoRotate=!reduce; c.autoRotateSpeed=.32;
       el.addEventListener('pointerdown',function(){c.autoRotate=false;});
@@ -942,6 +951,10 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
         }).filter(Boolean);
         return live.length;
       });
+  }
+  function sayGlofs(){
+    if(!glofs)return; var ev=glofs.events, n=ev.length, s2000=ev.filter(function(e){return e[2]>=2000;}).length;
+    info.innerHTML='<b>'+n.toLocaleString('en-GB')+' recorded glacial lake outbursts</b>, '+s2000.toLocaleString('en-GB')+' of them since 2000, grouped into hexagons; taller means more events. Data: <a href="https://doi.org/10.5281/zenodo.7330344">Glacial Lake Outburst Flood Database v4.2</a> (Lützow, Veh and Korup), CC BY 4.0, simplified to location and year.';
   }
   /* View buttons: no scroll-wheel zoom, so the page always scrolls normally */
   var VIEWS={himalaya:{lat:31,lng:83,altitude:.85},world:{lat:24,lng:78,altitude:2.05}};
@@ -998,6 +1011,14 @@ fetch('assets/data/datasets.json').then(function(r){return r.json();}).then(func
 
   document.querySelectorAll('.layer-toggles button').forEach(function(b){b.addEventListener('click',function(){
     var k=b.dataset.layer, on=b.getAttribute('aria-pressed')!=='true';
+    if(k==='glofs'&&on&&!glofs){
+      b.disabled=true; info.textContent='Loading the glacial lake outburst record';
+      fetch('assets/data/glofs.json?v=1').then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){
+        glofs=j; b.disabled=false; layers.glofs=true; b.setAttribute('aria-pressed','true'); render(); sayGlofs();
+      }).catch(function(){b.disabled=false;info.textContent='The outburst record could not load. Please try again.';});
+      return;
+    }
+    if(k==='glofs'&&on)setTimeout(sayGlofs,0);
     if(k==='live'&&on&&!live.length){
       b.disabled=true; info.textContent='Loading live events from NASA EONET';
       liveFetch().then(function(n){b.disabled=false;layers.live=true;b.setAttribute('aria-pressed','true');info.textContent=n+' open flood, landslide and storm events from the last 30 days.';render();})
