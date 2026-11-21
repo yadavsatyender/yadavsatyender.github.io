@@ -158,6 +158,16 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
 .hubteaser p{max-width:var(--measure)}
 
 /* Contact */
+.phd{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(20px,4vw,64px)}
+.phd h2{margin:0}
+.phd .intro{max-width:var(--measure);margin:0 0 1.4em}
+.phd dl{display:grid;grid-template-columns:11.5em minmax(0,1fr);gap:14px 20px;margin:0 0 1.6em}
+.phd dt{font-family:var(--sans);font-size:.98rem;color:var(--scree)}
+.phd dd{margin:0}
+.phd dd ul{margin:0;padding-left:1.1em}
+.phd dd li{margin:0 0 .35em}
+.phd .ask{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;margin:0;padding:0;list-style:none;font-family:var(--sans)}
+.hero .status-line a{color:inherit;text-decoration-color:var(--lake-fill);text-underline-offset:.2em}
 .contact{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,8fr);gap:clamp(20px,4vw,64px)}
 .contact p{max-width:var(--measure);margin:0 0 1em}
 .contact dl{display:grid;grid-template-columns:140px minmax(0,1fr);gap:10px 20px;margin:0;font-family:var(--sans);font-size:.98rem}
@@ -168,7 +178,9 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
   .hero,.explain,.assist,.about,.hubteaser{grid-template-columns:1fr}
   .panel{grid-template-columns:1fr}
   .posts{grid-template-columns:1fr 1fr}
-  .contact{grid-template-columns:1fr;gap:14px}
+  .contact,.phd{grid-template-columns:1fr;gap:14px}
+  .phd dl{grid-template-columns:1fr;gap:4px}
+  .phd dd{margin-bottom:12px}
   #globe{max-width:560px}
 }
 @media (max-width:720px){
@@ -206,7 +218,7 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
         <p class="role">Multi-hazard risk researcher. Volunteer, Disaster Risk Reduction Unit, UNESCO.<br>M.Tech, Soil and Water Conservation Engineering, G.B. Pant University of Agriculture and Technology.</p>
         <p class="lede">I map where landslides, floods and glacial lake outbursts are likely in the Himalaya, who lives in their path, and how AI can put that evidence in practitioners' hands.</p>
         <!-- EDIT: change if your situation changes -->
-        <p class="status-line">Looking for a PhD position starting in 2027</p>
+        <p class="status-line"><a href="#phd">Looking for a PhD position starting in 2027</a></p>
         <ul class="links">
           <li><a class="btn" href="cv.pdf" download="Satyender_Yadav_CV.pdf">Download CV (PDF)</a></li>
           <li><a href="https://scholar.google.com/citations?user=y6TnqXcAAAAJ">Google Scholar</a></li>
@@ -526,6 +538,38 @@ details.globe-list ul{columns:2;column-gap:28px;padding-left:18px;margin:10px 0 
     </section>
 
     <!-- CONTACT -->
+    <section id="phd" data-track-section="PhD plans" aria-labelledby="phd-h">
+      <div class="phd">
+        <h2 id="phd-h">What I'm looking for</h2>
+        <div>
+          <p class="intro">My main aim is a fully funded PhD starting in 2027, in a group that works on mountain hazards and disaster risk. I am also open to research roles in international organisations working on disaster risk reduction, where my geospatial and AI work can be put to direct use.</p>
+          <dl>
+            <dt>What I want to work on</dt>
+            <dd><ul>
+              <li>Dynamic, process-based modelling of cascading landslide and glacial lake outburst flood hazards in fast-changing mountain environments</li>
+              <li>Moving from index-based susceptibility maps to multi-hazard risk models that link hazard, exposure and social vulnerability</li>
+              <li>Earth observation and AI that put this evidence in the hands of the people who manage risk</li>
+            </ul></dd>
+            <dt>What I bring</dt>
+            <dd><ul>
+              <li>A multi-hazard risk index for all 111 subdistricts of Uttarakhand, and AHP and Fuzzy-AHP landslide models validated against thousands of recorded landslides</li>
+              <li>One published paper, one under review and one submitted; talks at EGU 2026, the World Landslide Forum and AGU26</li>
+              <li>Python, Google Earth Engine, QGIS, SWAT and openLISEM, with Sentinel-1 and 2, NASADEM, CHIRPS and GRACE data</li>
+              <li>A source-citing AI research assistant I designed and built for UNESCO and the International Consortium on Landslides</li>
+            </ul></dd>
+            <dt>Practical details</dt>
+            <dd>Start in 2027. M.Tech completed in 2025. IELTS Academic 7.5 (October 2026).</dd>
+            <dt>Also open to</dt>
+            <dd>Research, research assistant or consultant roles with UN agencies and international organisations in disaster risk reduction, climate risk or Earth observation</dd>
+          </dl>
+          <ul class="ask">
+            <li><a class="btn" href="mailto:satyenderyadav17@gmail.com?subject=PhD%20or%20research%20role%2C%202027">Email me about a PhD or a role</a></li>
+            <li><a href="cv.pdf" download="Satyender_Yadav_CV.pdf">Download CV (PDF)</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <section id="contact" data-track-section="Contact" aria-labelledby="contact-h">
       <div class="contact">
         <h2 id="contact-h">Contact</h2>
