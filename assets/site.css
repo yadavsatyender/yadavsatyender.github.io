@@ -53,10 +53,10 @@ a:hover{text-decoration-thickness:2px}
 .top nav a:hover,.top nav a[aria-current="page"]{color:var(--ink)}
 .top nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--lake);text-decoration-thickness:2px;text-underline-offset:.5em}
 .top nav li.theme-item{display:flex;align-items:center}
-.theme-toggle{display:none;place-items:center;width:34px;height:34px;margin:-8px -6px -8px 0;padding:0;border:0;border-radius:50%;background:none;color:var(--scree);cursor:pointer}
+.theme-toggle{display:none;place-items:center;width:34px;height:34px;margin:-8px -6px -8px 0;padding:0;border:1px solid var(--rule);border-radius:50%;background:none;color:var(--ink);cursor:pointer}
 :root[data-theme] .theme-toggle{display:inline-grid}
-.theme-toggle:hover{color:var(--ink);background:var(--rule)}
-.theme-toggle svg{width:18px;height:18px;display:block}
+.theme-toggle:hover{background:var(--rule)}
+.theme-toggle svg{width:18px;height:18px;min-width:18px;display:block}
 .theme-toggle .i-sun{display:none}
 :root[data-theme="dark"] .theme-toggle .i-sun{display:block}
 :root[data-theme="dark"] .theme-toggle .i-moon{display:none}
