@@ -53,13 +53,17 @@ a:hover{text-decoration-thickness:2px}
 .top nav a:hover,.top nav a[aria-current="page"]{color:var(--ink)}
 .top nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--lake);text-decoration-thickness:2px;text-underline-offset:.5em}
 .top nav li.theme-item{display:flex;align-items:center}
-.theme-toggle{display:none;place-items:center;width:34px;height:34px;margin:-8px -6px -8px 0;padding:0;border:1px solid var(--rule);border-radius:50%;background:none;color:var(--ink);cursor:pointer}
+.theme-toggle{display:none;position:relative;place-items:center;width:32px;height:32px;margin:-8px -6px -8px 0;padding:0;border:0;background:none;color:var(--ink);cursor:pointer}
 :root[data-theme] .theme-toggle{display:inline-grid}
-.theme-toggle:hover{background:var(--rule)}
+.theme-toggle:hover{color:var(--lake)}
 .theme-toggle svg{width:18px;height:18px;min-width:18px;display:block}
 .theme-toggle .i-sun{display:none}
 :root[data-theme="dark"] .theme-toggle .i-sun{display:block}
 :root[data-theme="dark"] .theme-toggle .i-moon{display:none}
+/* Label shown at once on hover or keyboard focus (the browser's own tooltip waits about a second) */
+.theme-tip{position:absolute;top:calc(100% + 6px);right:0;z-index:20;white-space:nowrap;font-family:var(--sans);font-size:.8125rem;line-height:1.2;background:var(--ink);color:var(--snow);padding:5px 9px;border-radius:4px;opacity:0;visibility:hidden;pointer-events:none}
+.theme-toggle:hover .theme-tip,.theme-toggle:focus-visible .theme-tip{opacity:1;visibility:visible}
+@media (hover:none){.theme-toggle:hover .theme-tip{opacity:0;visibility:hidden}}
 
 /* Type */
 h1,h2,h3{font-family:var(--sans);color:var(--ink)}

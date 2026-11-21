@@ -23,7 +23,9 @@
     if (meta) meta.setAttribute("content", BAR[t]);
     document.querySelectorAll(".theme-toggle").forEach(function (b) {
       b.setAttribute("aria-label", "Switch to " + next + " mode");
-      b.title = "Switch to " + next + " mode";
+      b.removeAttribute("title");
+      var tip = b.querySelector(".theme-tip");
+      if (tip) tip.textContent = "Switch to " + next + " mode";
     });
   }
 
